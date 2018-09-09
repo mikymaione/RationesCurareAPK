@@ -10,14 +10,12 @@ import it.mikymaione.RationesCurare.Globals.GB;
 public class Item extends LinearLayout
 {
 
+    public int IDD = -1;
     private TextView[] artTextView;
     private Context mContext;
-    private Spliter2 mTxtContent;
     private DataGrid.MemberCollection mc;
     private DataTable.DataRow Valore = null;
-
     private int MyColor;
-    public int IDD = -1;
 
     public Item(Context context, DataGrid.MemberCollection mc, DataTable.DataRow data, int IDD_)
     {
@@ -28,7 +26,6 @@ public class Item extends LinearLayout
         Valore = data;
         this.mc = mc;
 
-        int intCellSpliter = 0;
         int tot = mc.COLUMN_STYLE.size();
 
         artTextView = new TextView[data.getColumnSize()];
@@ -48,26 +45,11 @@ public class Item extends LinearLayout
             mc.ITEM_VIEW.get(i).add(artTextView[i]);
 
             addView(artTextView[i], new LinearLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, DataGridStyle.DataCell.Height));
-
-            if (intCellSpliter < mc.COLUMN_STYLE.size())
-            {
-                mTxtContent = new Spliter2(getContext(), mc, i);
-                mc.SPLITER_VIEW.get(i).add(mTxtContent);
-                addView(mTxtContent, new LinearLayout.LayoutParams(DataGridStyle.HeaderCell.Width, DataGridStyle.DataCell.Height));
-                intCellSpliter++;
-            }
         }
     }
 
     public void HighlightRow(boolean selected)
     {
-        /*
-        for (TextView e : artTextView)
-        {
-            e.setTypeface(null, selected ? Typeface.BOLD : Typeface.NORMAL);
-        }
-        */
-
         setBackgroundColor(selected ? GB.cHoloBlueLight : MyColor);
     }
 

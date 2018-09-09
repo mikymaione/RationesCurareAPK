@@ -2,8 +2,8 @@ package it.mikymaione.RationesCurare.DB.Tables;
 
 import java.util.Date;
 
-import it.mikymaione.RationesCurare.UI.CalendarControl.DateEvent;
 import it.mikymaione.RationesCurare.DB.Templates.baseTabellaDB;
+import it.mikymaione.RationesCurare.UI.CalendarControl.DateEvent;
 
 /**
  * Created by michele on 07/03/15.

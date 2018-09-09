@@ -1,6 +1,7 @@
 package it.mikymaione.RationesCurare.UI.Templates;
 
 import android.os.Bundle;
+import android.support.annotation.DimenRes;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,13 +110,15 @@ public abstract class baseRicerca<V> extends baseDB_WithDelete<V>
         return SelectedItem_;
     }
 
-    protected DataGrid.ColumnStyle CreaColonna(String name, String caption, int width_)
+    protected DataGrid.ColumnStyle CreaColonna(String name, String caption, @DimenRes int width_id)
     {
+        int width_ = getResources().getDimensionPixelSize(width_id);
         return new DataGrid.ColumnStyle(name, caption, width_);
     }
 
-    protected DataGrid.ColumnStyle CreaColonna(String FieldName_and_DisplayName, int width_)
+    protected DataGrid.ColumnStyle CreaColonna(String FieldName_and_DisplayName, @DimenRes int width_id)
     {
+        int width_ = getResources().getDimensionPixelSize(width_id);
         return new DataGrid.ColumnStyle(FieldName_and_DisplayName, width_);
     }
 

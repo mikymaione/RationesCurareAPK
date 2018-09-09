@@ -23,6 +23,7 @@ import java.util.Collections;
 public class DataGrid extends LinearLayout
 {
 
+    public CircularFifoQueue<Item> idSelectedItem = new CircularFifoQueue<Item>(9);
     private Context mContext;
     private LinearLayout mListHeader;
     private HorizontalScroller mHsv;
@@ -30,86 +31,6 @@ public class DataGrid extends LinearLayout
     private TextView mTvNoData;
     private String strNoDataText;
     private Display display;
-    public CircularFifoQueue<Item> idSelectedItem = new CircularFifoQueue<Item>(9);
-
-    public static class ColumnStyle
-    {
-
-        private String strColumnName;
-        private String strFieldName;
-        private int intWidth;
-        private int intIndex;
-        private int intSortOrder = -1;
-
-        public ColumnStyle(String FieldName_and_DisplayName, int width)
-        {
-            this(FieldName_and_DisplayName, FieldName_and_DisplayName, width);
-        }
-
-        public ColumnStyle(String FieldName, String DisplayName, int width)
-        {
-            strColumnName = DisplayName;
-            strFieldName = FieldName;
-            intWidth = width;
-        }
-
-        public void setIndex(int index)
-        {
-            intIndex = index;
-        }
-
-        public int getIndex()
-        {
-            return intIndex;
-        }
-
-        public String getColumnName()
-        {
-            return strColumnName;
-        }
-
-        public String getFieldName()
-        {
-            return strFieldName;
-        }
-
-        public int getWitdh()
-        {
-            return intWidth;
-        }
-
-        public void setWidth(int width)
-        {
-            intWidth = width;
-        }
-
-        public int getSortOder()
-        {
-            return intSortOrder;
-        }
-
-        public void setSortOrder(int SortOrder)
-        {
-            intSortOrder = SortOrder;
-        }
-
-    }
-
-    class MemberCollection
-    {
-        public boolean IS_SPLITER_CLICKED = false;
-        public MotionEvent DOWNSTART;
-        public LinearLayout DATAGRID_VIEW;
-        public DataGrid DATAGRID_WINDOW;
-        public ArrayList<TextView> HEADER_VIEW;
-        public ArrayList<ArrayList<TextView>> ITEM_VIEW;
-        public ArrayList<ArrayList<Spliter2>> SPLITER_VIEW;
-        public ArrayList<ColumnStyle> COLUMN_STYLE;
-        public DataGridAdapter DATAGRID_ADAPTER;
-        public ListView LIST_VIEW;
-        public Sort SORT_ALGO;
-        public DataTable DATA_SOURCE;
-    }
 
     public DataGrid(Context context, AttributeSet attrs) throws Exception
     {
@@ -125,9 +46,7 @@ public class DataGrid extends LinearLayout
         mc.DATAGRID_WINDOW = this;
         mc.HEADER_VIEW = new ArrayList<TextView>();
         mc.ITEM_VIEW = new ArrayList<ArrayList<TextView>>();
-        mc.SPLITER_VIEW = new ArrayList<ArrayList<Spliter2>>();
         mc.COLUMN_STYLE = new ArrayList<ColumnStyle>();
-        mc.SORT_ALGO = new Sort(mc);
     }
 
     public void DeleteRow(Object toFind)
@@ -149,37 +68,20 @@ public class DataGrid extends LinearLayout
 
     private void initHeader()
     {
-        Splitter Spliter;
         Header HeaderView;
-        int intCellSpliter = 0;
-        int headerSpilterWidth = 0;
-        int dataSpliterWidth = 0;
-        int WidthDifference = 0;
 
         for (int i = 0; i < mc.COLUMN_STYLE.size(); i++)
         {
             mc.COLUMN_STYLE.get(i).setIndex(i);
 
             HeaderView = new Header(getContext(), mc);
+            HeaderView.setTextColor(DataGridStyle.HeaderContainer.TextColor);
             HeaderView.setText((mc.COLUMN_STYLE.get(i)).getColumnName());
             HeaderView.setTag(mc.COLUMN_STYLE.get(i));
-
-            headerSpilterWidth = DataGridStyle.HeaderSpliterCell.LPadding + DataGridStyle.HeaderSpliterCell.RPadding;
-            dataSpliterWidth = DataGridStyle.SpliterCell.LPadding + DataGridStyle.SpliterCell.RPadding;
-            WidthDifference = (i == 0 || i == mc.COLUMN_STYLE.size()) ? (headerSpilterWidth - dataSpliterWidth) / 2 : headerSpilterWidth - dataSpliterWidth;
-            HeaderView.setWidth((mc.COLUMN_STYLE.get(i).getWitdh() - WidthDifference));
+            HeaderView.setWidth(mc.COLUMN_STYLE.get(i).getWitdh());
 
             mc.HEADER_VIEW.add(HeaderView);
-
             mListHeader.addView(HeaderView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, DataGridStyle.HeaderCell.Height));
-
-            if (intCellSpliter < mc.COLUMN_STYLE.size())
-            {
-                Spliter = new Splitter(getContext(), mc, i);
-                Spliter.setIndex(i);
-                mListHeader.addView(Spliter, new LinearLayout.LayoutParams(DataGridStyle.HeaderCell.Width, DataGridStyle.HeaderCell.Height));
-                intCellSpliter++;
-            }
         }
     }
 
@@ -198,7 +100,7 @@ public class DataGrid extends LinearLayout
         mListHeader = new LinearLayout(mContext);
         mListHeader.setOrientation(LinearLayout.HORIZONTAL);
         mListHeader.setBackgroundColor(DataGridStyle.HeaderContainer.BackgroundColor);
-        mListHeader.setBackgroundDrawable(getResources().getDrawable(DataGridStyle.HeaderContainer.Background));
+        //mListHeader.setBackgroundDrawable(getResources().getDrawable(DataGridStyle.HeaderContainer.Background));
 
         mc.LIST_VIEW = new ListView(mContext);
 
@@ -220,13 +122,10 @@ public class DataGrid extends LinearLayout
         mHsv = new HorizontalScroller(mContext, mc);
 
         ArrayList<TextView> ary;
-        ArrayList<Spliter2> ary2;
         for (int i = 0; i < mc.COLUMN_STYLE.size(); i++)
         {
             ary = new ArrayList<TextView>();
-            ary2 = new ArrayList<Spliter2>();
             mc.ITEM_VIEW.add(ary);
-            mc.SPLITER_VIEW.add(ary2);
         }
 
         mc.DATAGRID_VIEW.addView(mListHeader);
@@ -382,6 +281,71 @@ public class DataGrid extends LinearLayout
     public void setNoDataText(String strText)
     {
         strNoDataText = strText;
+    }
+
+    public static class ColumnStyle
+    {
+        private String strColumnName;
+        private String strFieldName;
+        private int intWidth;
+        private int intIndex;
+
+        public ColumnStyle(String FieldName_and_DisplayName, int width)
+        {
+            this(FieldName_and_DisplayName, FieldName_and_DisplayName, width);
+        }
+
+        public ColumnStyle(String FieldName, String DisplayName, int width)
+        {
+            strColumnName = DisplayName;
+            strFieldName = FieldName;
+            intWidth = width;
+        }
+
+        public int getIndex()
+        {
+            return intIndex;
+        }
+
+        public void setIndex(int index)
+        {
+            intIndex = index;
+        }
+
+        public String getColumnName()
+        {
+            return strColumnName;
+        }
+
+        public String getFieldName()
+        {
+            return strFieldName;
+        }
+
+        public int getWitdh()
+        {
+            return intWidth;
+        }
+
+        public void setWidth(int width)
+        {
+            intWidth = width;
+        }
+
+    }
+
+    class MemberCollection
+    {
+        public boolean IS_SPLITER_CLICKED = false;
+        public MotionEvent DOWNSTART;
+        public LinearLayout DATAGRID_VIEW;
+        public DataGrid DATAGRID_WINDOW;
+        public ArrayList<TextView> HEADER_VIEW;
+        public ArrayList<ArrayList<TextView>> ITEM_VIEW;
+        public ArrayList<ColumnStyle> COLUMN_STYLE;
+        public DataGridAdapter DATAGRID_ADAPTER;
+        public ListView LIST_VIEW;
+        public DataTable DATA_SOURCE;
     }
 
 

@@ -19,89 +19,6 @@ public class DataTable
     private int indexCounter = 0;
     private Hashtable<Integer, Integer> IDnIndex = new Hashtable<Integer, Integer>();
 
-    public class DataRow
-    {
-
-        private List<Object> columnValues;
-        private int id;
-
-        public DataRow(int id)
-        {
-            this.id = id;
-            columnValues = new ArrayList<Object>();
-
-            for (int i = 0; i < column.size(); i++)
-            {
-                columnValues.add(null);
-            }
-        }
-
-        public DataRow()
-        {
-            columnValues = new ArrayList<Object>();
-
-            for (int i = 0; i < column.size(); i++)
-            {
-                columnValues.add(null);
-            }
-        }
-
-        public int getID()
-        {
-            return id;
-        }
-
-        public String get_for_grid(String columnName)
-        {
-            String u = "";
-            Object o = get(columnName);
-
-            if (o instanceof String)
-            {
-                u = (String) o;
-            }
-            else if (o instanceof Integer)
-            {
-                u = o.toString();
-            }
-            else if (o instanceof Double)
-            {
-                u = GB.DoubleToEuro((Double) o);
-            }
-            else if (o instanceof Date)
-            {
-                u = GB.DateToString((Date) o);
-            }
-
-            return u;
-        }
-
-        public Object get(String FieldName_)
-        {
-            return columnValues.get(column.indexOf(FieldName_));
-        }
-
-        public Object get(int columnIndex)
-        {
-            return columnValues.get(columnIndex);
-        }
-
-        public void set(String FieldName_, Object value)
-        {
-            columnValues.set(column.indexOf(FieldName_), value);
-        }
-
-        public void set(int columnIndex, Object value)
-        {
-            columnValues.set(columnIndex, value);
-        }
-
-        public int getColumnSize()
-        {
-            return column.size();
-        }
-    }
-
     public void addColumn(String columnName)
     {
         column.add(columnName);
@@ -318,6 +235,89 @@ public class DataTable
         for (int i = 0; i < row.size(); i++)
         {
             IDnIndex.put(row.get(i).getID(), i);
+        }
+    }
+
+    public class DataRow
+    {
+
+        private List<Object> columnValues;
+        private int id;
+
+        public DataRow(int id)
+        {
+            this.id = id;
+            columnValues = new ArrayList<Object>();
+
+            for (int i = 0; i < column.size(); i++)
+            {
+                columnValues.add(null);
+            }
+        }
+
+        public DataRow()
+        {
+            columnValues = new ArrayList<Object>();
+
+            for (int i = 0; i < column.size(); i++)
+            {
+                columnValues.add(null);
+            }
+        }
+
+        public int getID()
+        {
+            return id;
+        }
+
+        public String get_for_grid(String columnName)
+        {
+            String u = "";
+            Object o = get(columnName);
+
+            if (o instanceof String)
+            {
+                u = (String) o;
+            }
+            else if (o instanceof Integer)
+            {
+                u = o.toString();
+            }
+            else if (o instanceof Double)
+            {
+                u = GB.DoubleToEuro((Double) o);
+            }
+            else if (o instanceof Date)
+            {
+                u = GB.DateToString((Date) o);
+            }
+
+            return u;
+        }
+
+        public Object get(String FieldName_)
+        {
+            return columnValues.get(column.indexOf(FieldName_));
+        }
+
+        public Object get(int columnIndex)
+        {
+            return columnValues.get(columnIndex);
+        }
+
+        public void set(String FieldName_, Object value)
+        {
+            columnValues.set(column.indexOf(FieldName_), value);
+        }
+
+        public void set(int columnIndex, Object value)
+        {
+            columnValues.set(columnIndex, value);
+        }
+
+        public int getColumnSize()
+        {
+            return column.size();
         }
     }
 

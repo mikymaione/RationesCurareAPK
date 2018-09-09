@@ -3,7 +3,6 @@ package it.mikymaione.RationesCurare.UI.Fragments;
 import java.util.ArrayList;
 
 import it.mikymaione.RationesCurare.DB.Wrappers.cCasse;
-import it.mikymaione.RationesCurare.Globals.Costanti_Tabella;
 import it.mikymaione.RationesCurare.Globals.GB;
 import it.mikymaione.RationesCurare.Globals.PB;
 import it.mikymaione.RationesCurare.Globals.cErrore;
@@ -30,7 +29,7 @@ public class GestioneCasse extends baseRicerca<String>
     protected ColumnStyle[] DammiColonne()
     {
         return new ColumnStyle[]{
-                CreaColonna("nome", "Cassa", Costanti_Tabella.StringaBreve)
+                CreaColonna("nome", "Cassa", R.dimen.StringaBreve)
                 //CreaColonna("imgName", "Immagine")
         };
     }

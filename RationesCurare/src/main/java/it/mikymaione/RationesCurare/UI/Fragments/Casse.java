@@ -3,7 +3,6 @@ package it.mikymaione.RationesCurare.UI.Fragments;
 import java.util.ArrayList;
 
 import it.mikymaione.RationesCurare.DB.Wrappers.cMovimenti;
-import it.mikymaione.RationesCurare.Globals.Costanti_Tabella;
 import it.mikymaione.RationesCurare.Globals.GB;
 import it.mikymaione.RationesCurare.Globals.PB;
 import it.mikymaione.RationesCurare.Globals.cErrore;
@@ -20,7 +19,7 @@ public class Casse extends baseRicerca<String>
     {
         cMovimenti m = new cMovimenti(DB);
 
-        return "RationesCurare: " + GB.DoubleToEuro(m.Saldo());
+        return GB.DoubleToEuro(m.Saldo());
     }
 
     @Override
@@ -39,8 +38,8 @@ public class Casse extends baseRicerca<String>
     protected DataGrid.ColumnStyle[] DammiColonne()
     {
         return new DataGrid.ColumnStyle[]{
-                CreaColonna("tipo", "Cassa", Costanti_Tabella.StringaBreve),
-                CreaColonna("soldi", "Saldo", Costanti_Tabella.Soldi)
+                CreaColonna("tipo", "Cassa", R.dimen.StringaBreve),
+                CreaColonna("soldi", "Saldo", R.dimen.Soldi)
         };
     }
 

@@ -16,22 +16,15 @@ import it.mikymaione.RationesCurare.R;
 
 /**
  * @author M. Ritscher
- *         11/11/13.
+ * 11/11/13.
  */
 public class EventMenuFragment extends Fragment
 {
 
+    EventSelectedListener mCallback;
     private ListView mEventList;
     private List<DateEvent> mEvents;
-
     private ArrayAdapter<DateEvent> mEventAdapter;
-
-    EventSelectedListener mCallback;
-
-    public interface EventSelectedListener
-    {
-        public void onEventSelected(DateEvent event);
-    }
 
     public EventMenuFragment()
     {
@@ -123,6 +116,11 @@ public class EventMenuFragment extends Fragment
             mEventAdapter.addAll(events);
             mEventAdapter.notifyDataSetChanged();
         }
+    }
+
+    public interface EventSelectedListener
+    {
+        public void onEventSelected(DateEvent event);
     }
 
 

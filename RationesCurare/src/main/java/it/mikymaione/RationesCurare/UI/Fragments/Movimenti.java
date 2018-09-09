@@ -10,7 +10,6 @@ import java.util.Date;
 import it.mikymaione.RationesCurare.DB.Tables.movimenti_ricerca;
 import it.mikymaione.RationesCurare.DB.Templates.QPar;
 import it.mikymaione.RationesCurare.DB.Wrappers.cMovimenti;
-import it.mikymaione.RationesCurare.Globals.Costanti_Tabella;
 import it.mikymaione.RationesCurare.Globals.GB;
 import it.mikymaione.RationesCurare.Globals.PB;
 import it.mikymaione.RationesCurare.Globals.cErrore;
@@ -45,15 +44,15 @@ public class Movimenti extends baseRicerca<Integer>
         if (ricerca == null)
         {
             d = m.SaldoByTipo(cassa);
-            r = cassa + ": ";
+            r = cassa;
         }
         else
         {
             d = m.SaldoByParams(getParams());
-            r = "Risultato ricerca: ";
+            r = "Risultato ricerca";
         }
 
-        r += GB.DoubleToEuro(d);
+        //r += GB.DoubleToEuro(d);
 
         return r;
     }
@@ -121,13 +120,13 @@ public class Movimenti extends baseRicerca<Integer>
     protected ColumnStyle[] DammiColonne()
     {
         return new DataGrid.ColumnStyle[]{
-                CreaColonna("ID", "ID", Costanti_Tabella.ID),
-                CreaColonna("data", "Data", Costanti_Tabella.Data),
-                CreaColonna("soldi", "Soldi", Costanti_Tabella.Soldi),
-                CreaColonna("tipo", "Cassa", Costanti_Tabella.StringaBreve),
-                CreaColonna("MacroArea", "Macroarea", Costanti_Tabella.StringaBreve),
-                CreaColonna("descrizione", "Descrizione", Costanti_Tabella.StringaLunga),
-                CreaColonna("nome", "Nome", Costanti_Tabella.StringaBreve)
+                CreaColonna("ID", "ID", R.dimen.ID),
+                CreaColonna("data", "Data", R.dimen.Data),
+                CreaColonna("soldi", "Soldi", R.dimen.Soldi),
+                CreaColonna("tipo", "Cassa", R.dimen.StringaBreve),
+                CreaColonna("MacroArea", "Macroarea", R.dimen.StringaBreve),
+                CreaColonna("descrizione", "Descrizione", R.dimen.StringaLunga),
+                CreaColonna("nome", "Nome", R.dimen.StringaBreve)
         };
     }
 

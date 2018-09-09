@@ -13,10 +13,8 @@ import it.mikymaione.RationesCurare.R;
  */
 public abstract class baseDati<V> extends baseDB_WithDelete
 {
-    public V MyID;
-
     public final String ARG_MyID = "MyID";
-
+    public V MyID;
 
     @Override
     public void setArguments(Bundle args)

@@ -24,22 +24,11 @@ import it.mikymaione.RationesCurare.Globals.cErrore;
  */
 public class cDB
 {
+    private static cDB DB = null;
     private HashMap<String, String> QueryLette = new HashMap<String, String>();
     private AssetManager assetManager = null;
     private SQLiteDatabase data_base = null;
     private String DBPath = "";
-
-    private static cDB DB = null;
-
-    private enum eEseguiSQLNonQuery
-    {
-        delete, update, insert;
-    }
-
-    public static cDB DB()
-    {
-        return DB;
-    }
 
     public cDB(AssetManager assetManager_, File getExternalFilesDir)
     {
@@ -126,6 +115,11 @@ public class cDB
         DB = this;
     }
 
+    public static cDB DB()
+    {
+        return DB;
+    }
+
     public String getDBPath()
     {
         return DBPath;
@@ -145,7 +139,6 @@ public class cDB
             data_base = SQLiteDatabase.openDatabase(DBPath, null, SQLiteDatabase.OPEN_READWRITE);
         }
     }
-
 
     private String LeggiSQL(eTabelle t, eTipi nome)
     {
@@ -325,6 +318,11 @@ public class cDB
                 data_base.close();
             }
         }
+    }
+
+    private enum eEseguiSQLNonQuery
+    {
+        delete, update, insert;
     }
 
 

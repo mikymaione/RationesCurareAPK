@@ -14,12 +14,11 @@ import it.mikymaione.RationesCurare.UI.Fragments.ePosizione;
  */
 public abstract class baseDB extends baseFragment
 {
+    public final String ARG_Padre_Fragment = "Padre_Fragment";
+    public final String ARG_Padre_Posizione = "Padre_Posizione";
     protected cDB DB = null;
     private baseFragment Padre_Fragment = null;
     private ePosizione Padre_Posizione = null;
-
-    public final String ARG_Padre_Fragment = "Padre_Fragment";
-    public final String ARG_Padre_Posizione = "Padre_Posizione";
 
     protected baseDB()
     {

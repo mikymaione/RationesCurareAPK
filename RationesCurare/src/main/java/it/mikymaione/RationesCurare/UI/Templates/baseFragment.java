@@ -26,11 +26,6 @@ public abstract class baseFragment extends Fragment implements Serializable
         return MyView;
     }
 
-    public interface OnFragmentInteractionListener
-    {
-        public void onFragmentInteraction(Uri uri);
-    }
-
     protected void SelezionaInSpinner(Spinner spinner, String seleziona)
     {
         int index = -1;
@@ -63,6 +58,11 @@ public abstract class baseFragment extends Fragment implements Serializable
     protected abstract int get_R_layout_fragment_name();
 
     public abstract java.lang.CharSequence GetTitolo();
+
+    public interface OnFragmentInteractionListener
+    {
+        public void onFragmentInteraction(Uri uri);
+    }
 
 
 }

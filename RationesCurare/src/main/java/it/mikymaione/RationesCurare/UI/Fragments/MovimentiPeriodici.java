@@ -3,7 +3,6 @@ package it.mikymaione.RationesCurare.UI.Fragments;
 import java.util.ArrayList;
 
 import it.mikymaione.RationesCurare.DB.Wrappers.cMovimentiTempo;
-import it.mikymaione.RationesCurare.Globals.Costanti_Tabella;
 import it.mikymaione.RationesCurare.Globals.GB;
 import it.mikymaione.RationesCurare.Globals.PB;
 import it.mikymaione.RationesCurare.Globals.cErrore;
@@ -43,20 +42,20 @@ public class MovimentiPeriodici extends baseRicerca<Integer>
     protected DataGrid.ColumnStyle[] DammiColonne()
     {
         return new DataGrid.ColumnStyle[]{
-                CreaColonna("ID", "ID", Costanti_Tabella.ID),
-                CreaColonna("soldi", "Soldi", Costanti_Tabella.Soldi),
-                CreaColonna("tipo", "Cassa", Costanti_Tabella.StringaBreve),
+                CreaColonna("ID", "ID", R.dimen.ID),
+                CreaColonna("soldi", "Soldi", R.dimen.Soldi),
+                CreaColonna("tipo", "Cassa", R.dimen.StringaBreve),
 
-                CreaColonna("NumeroGiorni", "N. giorni", Costanti_Tabella.NumeroBreve),
-                CreaColonna("PartendoDalGiorno", "Partendo da", Costanti_Tabella.Data),
+                CreaColonna("NumeroGiorni", "N. giorni", R.dimen.NumeroBreve),
+                CreaColonna("PartendoDalGiorno", "Partendo da", R.dimen.Data),
 
-                CreaColonna("GiornoDelMese_SoloGiorno", "Giorno del mese", Costanti_Tabella.NumeroBreve),
-                CreaColonna("Periodo", "Periodo", Costanti_Tabella.ID),
+                CreaColonna("GiornoDelMese_SoloGiorno", "Giorno del mese", R.dimen.NumeroBreve),
+                CreaColonna("Periodo", "Periodo", R.dimen.ID),
 
-                CreaColonna("descrizione", "Descrizione", Costanti_Tabella.StringaBreve),
-                CreaColonna("MacroArea", "Macroarea", Costanti_Tabella.StringaBreve),
+                CreaColonna("descrizione", "Descrizione", R.dimen.StringaBreve),
+                CreaColonna("MacroArea", "Macroarea", R.dimen.StringaBreve),
 
-                CreaColonna("nome", "Nome", Costanti_Tabella.StringaBreve)
+                CreaColonna("nome", "Nome", R.dimen.StringaBreve)
         };
     }
 

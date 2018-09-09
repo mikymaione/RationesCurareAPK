@@ -26,13 +26,12 @@ import it.mikymaione.RationesCurare.UI.Templates.baseDati;
 
 public class MovimentiPeriodici_Dettaglio extends baseDati<Integer>
 {
+    public static final String ARG_Cassa = "Cassa";
     private String Cassa = "";
     private Spinner eCassa, eTipoGiorniMese;
     private EditText eSoldi, eNome, eNumeroGiorni;
     private AutoCompleteTextView eMacroArea, eDescrizione;
     private DateEditText eGiornoDelMese, eScadenza;
-
-    public static final String ARG_Cassa = "Cassa";
 
     @Override
     public void setArguments(Bundle args)

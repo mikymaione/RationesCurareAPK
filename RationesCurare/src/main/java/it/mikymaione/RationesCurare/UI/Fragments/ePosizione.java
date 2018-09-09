@@ -30,21 +30,6 @@ public enum ePosizione
         id = i_;
     }
 
-    public int GetID()
-    {
-        return id;
-    }
-
-    public boolean IsEmpty()
-    {
-        return this.equals(None);
-    }
-
-    public boolean Compare(int i)
-    {
-        return id == i;
-    }
-
     public static ePosizione GetValue(int _id)
     {
         ePosizione[] As = ePosizione.values();
@@ -58,6 +43,21 @@ public enum ePosizione
         }
 
         return None;
+    }
+
+    public int GetID()
+    {
+        return id;
+    }
+
+    public boolean IsEmpty()
+    {
+        return this.equals(None);
+    }
+
+    public boolean Compare(int i)
+    {
+        return id == i;
     }
 
 }

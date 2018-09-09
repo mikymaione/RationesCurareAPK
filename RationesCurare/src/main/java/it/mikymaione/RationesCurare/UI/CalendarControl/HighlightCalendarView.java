@@ -95,295 +95,191 @@ import it.mikymaione.RationesCurare.R;
 public class HighlightCalendarView extends FrameLayout
 {
 
-    private Calendar CurrentDate;
     /**
      * Tag for logging.
      */
     private static final String LOG_TAG = HighlightCalendarView.class.getSimpleName();
-
     /**
      * Default value whether to show week number.
      */
     private static final boolean DEFAULT_SHOW_WEEK_NUMBER = true;
-
     /**
      * The number of milliseconds in a day.e
      */
     private static final long MILLIS_IN_DAY = 86400000L;
-
     /**
      * The number of day in a week.
      */
     private static final int DAYS_PER_WEEK = 7;
-
     /**
      * The number of milliseconds in a week.
      */
     private static final long MILLIS_IN_WEEK = DAYS_PER_WEEK * MILLIS_IN_DAY;
-
     /**
      * Affects when the month selection will change while scrolling upe
      */
     private static final int SCROLL_HYST_WEEKS = 2;
-
     /**
      * How long the GoTo fling animation should last.
      */
     private static final int GOTO_SCROLL_DURATION = 1000;
-
     /**
      * The duration of the adjustment upon a user scroll in milliseconds.
      */
     private static final int ADJUSTMENT_SCROLL_DURATION = 500;
-
     /**
      * How long to wait after receiving an onScrollStateChanged notification
      * before acting on it.
      */
     private static final int SCROLL_CHANGE_DELAY = 40;
-
     /**
      * The default minimal date.
      */
     private static final String DEFAULT_MIN_DATE = "01/01/1700";
-
     /**
      * The default maximal date.
      */
     private static final String DEFAULT_MAX_DATE = "01/01/3100";
-
     private static final int DEFAULT_SHOWN_WEEK_COUNT = 6;
-
     private static final int DEFAULT_DATE_TEXT_SIZE = 14;
-
     private static final int UNSCALED_WEEK_MIN_VISIBLE_HEIGHT = 12;
-
     private static final int UNSCALED_SELECTED_DATE_VERTICAL_BAR_WIDTH = 6;
-
     private static final int UNSCALED_LIST_SCROLL_TOP_OFFSET = 2;
-
     private static final int UNSCALED_BOTTOM_BUFFER = 20;
-
     private static final int UNSCALED_WEEK_SEPARATOR_LINE_WIDTH = 1;
-
     private static final int DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID = -1;
-
     private final int mWeekSeperatorLineWidth;
-
-    private int mDateTextSize;
-
-    private Drawable mSelectedDateVerticalBar;
-
     private final int mSelectedDateVerticalBarWidth;
-
-    private int mSelectedWeekBackgroundColor;
-
-    private int mFocusedMonthDateColor;
-
-    private int mUnfocusedMonthDateColor;
-
-    private int mWeekSeparatorLineColor;
-
-    private int mWeekNumberColor;
-
     private final int mEventBarColor;
-
-    private int mWeekDayTextAppearanceResId;
-
-    private int mDateTextAppearanceResId;
-
-    /**
-     * The top offset of the weeks list.
-     */
-    private int mListScrollTopOffset = 2;
-
-    /**
-     * The visible height of a week view.
-     */
-    private int mWeekMinVisibleHeight = 12;
-
-    /**
-     * The visible height of a week view.
-     */
-    private int mBottomBuffer = 20;
-
-    /**
-     * The number of shown weeks.
-     */
-    private int mShownWeekCount;
-
-    /**
-     * Flag whether to show the week number.
-     */
-    private boolean mShowWeekNumber;
-
     /**
      * The number of day per week to be shown.
      */
     private final int mDaysPerWeek = 7;
-
     /**
      * The friction of the week list while flinging.
      */
     private final float mFriction = .05f;
-
     /**
      * Scale for adjusting velocity of the week list while flinging.
      */
     private final float mVelocityScale = 0.333f;
-
-    /**
-     * The adapter for the weeks list.
-     */
-    private WeeksAdapter mAdapter;
-
     /**
      * The weeks list.
      */
     private final ListView mListView;
-
     /**
      * The name of the month to display.
      */
     private final TextView mMonthName;
-
     /**
      * The header with week day names.
      */
     private final ViewGroup mDayNamesHeader;
-
-    /**
-     * Cached labels for the week names header.
-     */
-    private String[] mDayLabels;
-
-    /**
-     * The first day of the week.
-     */
-    private int mFirstDayOfWeek;
-
-    /**
-     * Which month should be displayed/highlighted [0-11].
-     */
-    private int mCurrentMonthDisplayed;
-
-    /**
-     * Used for tracking during a scroll.
-     */
-    private long mPreviousScrollPosition;
-
-    /**
-     * Used for tracking which direction the view is scrolling.
-     */
-    private boolean mIsScrollingUp = false;
-
-    /**
-     * The previous scroll state of the weeks ListView.
-     */
-    private int mPreviousScrollState = OnScrollListener.SCROLL_STATE_IDLE;
-
-    /**
-     * The current scroll state of the weeks ListView.
-     */
-    private int mCurrentScrollState = OnScrollListener.SCROLL_STATE_IDLE;
-
-    /**
-     * Listener for changes in the selected day.
-     */
-    private OnDateSelectedListener mOnDateChangeListener;
-
     /**
      * Command for adjusting the position after a scroll/fling.
      */
     private final ScrollStateRunnable mScrollStateChangedRunnable = new ScrollStateRunnable();
-
-    /**
-     * Temporary instance to avoid multiple instantiations.
-     */
-    private Calendar mTempDate;
-
-    /**
-     * The first day of the focused month.
-     */
-    private Calendar mFirstDayOfMonth;
-
-    /**
-     * The start date of the range supported by this picker.
-     */
-    private Calendar mMinDate;
-
-    /**
-     * The end date of the range supported by this picker.
-     */
-    private Calendar mMaxDate;
-
     /**
      * Date format for parsing dates.
      */
     private final java.text.DateFormat mDateFormat = new SimpleDateFormat(GB.ItalianDateFormatString);
-
-    /**
-     * The current locale.
-     */
-    private Locale mCurrentLocale;
-
-    private Context mContext;
-
     /**
      * The event store
      */
     private final SparseArray<List<DateEvent>> mEvents = new SparseArray<List<DateEvent>>();
-
+    private Calendar CurrentDate;
+    private int mDateTextSize;
+    private Drawable mSelectedDateVerticalBar;
+    private int mSelectedWeekBackgroundColor;
+    private int mFocusedMonthDateColor;
+    private int mUnfocusedMonthDateColor;
+    private int mWeekSeparatorLineColor;
+    private int mWeekNumberColor;
+    private int mWeekDayTextAppearanceResId;
+    private int mDateTextAppearanceResId;
     /**
-     * The callback used to indicate the user changes the date.
+     * The top offset of the weeks list.
      */
-    public interface OnDateSelectedListener
-    {
-
-        /**
-         * Called upon change of the selected day.
-         *
-         * @param view       The view associated with this listener.
-         * @param year       The year that was set.
-         * @param month      The month that was set [0-11].
-         * @param dayOfMonth The day of the month that was set.
-         */
-        public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
-
-        /**
-         * Called after the calendar was scrolled to a different
-         * view.
-         * The listener will be notified with the now shown first and
-         * last day.
-         * So the list of events may be refreshed for the shown range.
-         *
-         * @param startDate
-         * @param endDate
-         */
-        public void onViewChanged(long startDate, long endDate);
-
-        /**
-         * If a day with an event attached was selected.
-         * The listener will be notified about which event was selected.
-         *
-         * @param event
-         */
-        public void onEventSelected(DateEvent event);
-
-        /**
-         * Called when a user clicked on the menu entry to add a new
-         * event for this day or is a day is selected
-         *
-         * @param date
-         */
-        public void onAddEvent(long date);
-    }
-
+    private int mListScrollTopOffset = 2;
+    /**
+     * The visible height of a week view.
+     */
+    private int mWeekMinVisibleHeight = 12;
+    /**
+     * The visible height of a week view.
+     */
+    private int mBottomBuffer = 20;
+    /**
+     * The number of shown weeks.
+     */
+    private int mShownWeekCount;
+    /**
+     * Flag whether to show the week number.
+     */
+    private boolean mShowWeekNumber;
+    /**
+     * The adapter for the weeks list.
+     */
+    private WeeksAdapter mAdapter;
+    /**
+     * Cached labels for the week names header.
+     */
+    private String[] mDayLabels;
+    /**
+     * The first day of the week.
+     */
+    private int mFirstDayOfWeek;
+    /**
+     * Which month should be displayed/highlighted [0-11].
+     */
+    private int mCurrentMonthDisplayed;
+    /**
+     * Used for tracking during a scroll.
+     */
+    private long mPreviousScrollPosition;
+    /**
+     * Used for tracking which direction the view is scrolling.
+     */
+    private boolean mIsScrollingUp = false;
+    /**
+     * The previous scroll state of the weeks ListView.
+     */
+    private int mPreviousScrollState = OnScrollListener.SCROLL_STATE_IDLE;
+    /**
+     * The current scroll state of the weeks ListView.
+     */
+    private int mCurrentScrollState = OnScrollListener.SCROLL_STATE_IDLE;
+    /**
+     * Listener for changes in the selected day.
+     */
+    private OnDateSelectedListener mOnDateChangeListener;
+    /**
+     * Temporary instance to avoid multiple instantiations.
+     */
+    private Calendar mTempDate;
+    /**
+     * The first day of the focused month.
+     */
+    private Calendar mFirstDayOfMonth;
+    /**
+     * The start date of the range supported by this picker.
+     */
+    private Calendar mMinDate;
+    /**
+     * The end date of the range supported by this picker.
+     */
+    private Calendar mMaxDate;
+    /**
+     * The current locale.
+     */
+    private Locale mCurrentLocale;
+    private Context mContext;
 
     public HighlightCalendarView(Context context)
     {
         this(context, null);
     }
+
 
     public HighlightCalendarView(Context context, AttributeSet attrs)
     {
@@ -492,6 +388,17 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
+     * Gets the number of weeks to be shown.
+     *
+     * @return The shown week count.
+     * @attr ref android.R.styleable#CalendarView_shownWeekCount
+     */
+    public int getShownWeekCount()
+    {
+        return mShownWeekCount;
+    }
+
+    /**
      * Sets the number of weeks to be shown.
      *
      * @param count The shown week count.
@@ -507,14 +414,14 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the number of weeks to be shown.
+     * Gets the background color for the selected week.
      *
-     * @return The shown week count.
-     * @attr ref android.R.styleable#CalendarView_shownWeekCount
+     * @return The week background color.
+     * @attr ref android.R.styleable#CalendarView_selectedWeekBackgroundColor
      */
-    public int getShownWeekCount()
+    public int getSelectedWeekBackgroundColor()
     {
-        return mShownWeekCount;
+        return mSelectedWeekBackgroundColor;
     }
 
     /**
@@ -541,14 +448,14 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the background color for the selected week.
+     * Gets the color for the dates in the focused month.
      *
-     * @return The week background color.
-     * @attr ref android.R.styleable#CalendarView_selectedWeekBackgroundColor
+     * @return The focused month date color.
+     * @attr ref android.R.styleable#CalendarView_focusedMonthDateColor
      */
-    public int getSelectedWeekBackgroundColor()
+    public int getFocusedMonthDateColor()
     {
-        return mSelectedWeekBackgroundColor;
+        return mFocusedMonthDateColor;
     }
 
     /**
@@ -575,12 +482,12 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the color for the dates in the focused month.
+     * Gets the color for the dates in a not focused month.
      *
-     * @return The focused month date color.
-     * @attr ref android.R.styleable#CalendarView_focusedMonthDateColor
+     * @return A not focused month date color.
+     * @attr ref android.R.styleable#CalendarView_unfocusedMonthDateColor
      */
-    public int getFocusedMonthDateColor()
+    public int getUnfocusedMonthDateColor()
     {
         return mFocusedMonthDateColor;
     }
@@ -609,14 +516,14 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the color for the dates in a not focused month.
+     * Gets the color for the week numbers.
      *
-     * @return A not focused month date color.
-     * @attr ref android.R.styleable#CalendarView_unfocusedMonthDateColor
+     * @return The week number color.
+     * @attr ref android.R.styleable#CalendarView_weekNumberColor
      */
-    public int getUnfocusedMonthDateColor()
+    public int getWeekNumberColor()
     {
-        return mFocusedMonthDateColor;
+        return mWeekNumberColor;
     }
 
     /**
@@ -638,14 +545,14 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the color for the week numbers.
+     * Gets the color for the separator line between weeks.
      *
-     * @return The week number color.
-     * @attr ref android.R.styleable#CalendarView_weekNumberColor
+     * @return The week separator color.
+     * @attr ref android.R.styleable#CalendarView_weekSeparatorLineColor
      */
-    public int getWeekNumberColor()
+    public int getWeekSeparatorLineColor()
     {
-        return mWeekNumberColor;
+        return mWeekSeparatorLineColor;
     }
 
     /**
@@ -664,14 +571,14 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the color for the separator line between weeks.
+     * Gets the text appearance for the week day abbreviation of the calendar header.
      *
-     * @return The week separator color.
-     * @attr ref android.R.styleable#CalendarView_weekSeparatorLineColor
+     * @return The text appearance resource id.
+     * @attr ref android.R.styleable#CalendarView_weekDayTextAppearance
      */
-    public int getWeekSeparatorLineColor()
+    public int getWeekDayTextAppearance()
     {
-        return mWeekSeparatorLineColor;
+        return mWeekDayTextAppearanceResId;
     }
 
     /**
@@ -690,14 +597,14 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
-     * Gets the text appearance for the week day abbreviation of the calendar header.
+     * Gets the text appearance for the calendar dates.
      *
      * @return The text appearance resource id.
-     * @attr ref android.R.styleable#CalendarView_weekDayTextAppearance
+     * @attr ref android.R.styleable#CalendarView_dateTextAppearance
      */
-    public int getWeekDayTextAppearance()
+    public int getDateTextAppearance()
     {
-        return mWeekDayTextAppearanceResId;
+        return mDateTextAppearanceResId;
     }
 
     /**
@@ -716,27 +623,16 @@ public class HighlightCalendarView extends FrameLayout
         }
     }
 
-    /**
-     * Gets the text appearance for the calendar dates.
-     *
-     * @return The text appearance resource id.
-     * @attr ref android.R.styleable#CalendarView_dateTextAppearance
-     */
-    public int getDateTextAppearance()
+    @Override
+    public boolean isEnabled()
     {
-        return mDateTextAppearanceResId;
+        return mListView.isEnabled();
     }
 
     @Override
     public void setEnabled(boolean enabled)
     {
         mListView.setEnabled(enabled);
-    }
-
-    @Override
-    public boolean isEnabled()
-    {
-        return mListView.isEnabled();
     }
 
     @Override
@@ -867,6 +763,17 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
+     * Gets whether to show the week number.
+     *
+     * @return True if showing the week number.
+     * @attr ref android.R.styleable#CalendarView_showWeekNumber
+     */
+    public boolean getShowWeekNumber()
+    {
+        return mShowWeekNumber;
+    }
+
+    /**
      * Sets whether to show the week number.
      *
      * @param showWeekNumber True to show the week number.
@@ -881,17 +788,6 @@ public class HighlightCalendarView extends FrameLayout
         mShowWeekNumber = showWeekNumber;
         mAdapter.notifyDataSetChanged();
         setUpHeader();
-    }
-
-    /**
-     * Gets whether to show the week number.
-     *
-     * @return True if showing the week number.
-     * @attr ref android.R.styleable#CalendarView_showWeekNumber
-     */
-    public boolean getShowWeekNumber()
-    {
-        return mShowWeekNumber;
     }
 
     /**
@@ -1342,7 +1238,7 @@ public class HighlightCalendarView extends FrameLayout
      * month.
      */
     private void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-            int totalItemCount)
+                          int totalItemCount)
     {
         WeekView child = (WeekView) view.getChildAt(0);
         if (child == null)
@@ -1478,6 +1374,51 @@ public class HighlightCalendarView extends FrameLayout
     }
 
     /**
+     * The callback used to indicate the user changes the date.
+     */
+    public interface OnDateSelectedListener
+    {
+
+        /**
+         * Called upon change of the selected day.
+         *
+         * @param view       The view associated with this listener.
+         * @param year       The year that was set.
+         * @param month      The month that was set [0-11].
+         * @param dayOfMonth The day of the month that was set.
+         */
+        public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
+
+        /**
+         * Called after the calendar was scrolled to a different
+         * view.
+         * The listener will be notified with the now shown first and
+         * last day.
+         * So the list of events may be refreshed for the shown range.
+         *
+         * @param startDate
+         * @param endDate
+         */
+        public void onViewChanged(long startDate, long endDate);
+
+        /**
+         * If a day with an event attached was selected.
+         * The listener will be notified about which event was selected.
+         *
+         * @param event
+         */
+        public void onEventSelected(DateEvent event);
+
+        /**
+         * Called when a user clicked on the menu entry to add a new
+         * event for this day or is a day is selected
+         *
+         * @param date
+         */
+        public void onAddEvent(long date);
+    }
+
+    /**
      * Command responsible for acting upon scroll state changes.
      */
     private class ScrollStateRunnable implements Runnable
@@ -1558,14 +1499,10 @@ public class HighlightCalendarView extends FrameLayout
     private class WeeksAdapter extends BaseAdapter implements OnTouchListener
     {
 
-        private int mSelectedWeek;
-
         private final GestureDetector mGestureDetector;
-
-        private int mFocusedMonth;
-
         private final Calendar mSelectedDate = Calendar.getInstance();
-
+        private int mSelectedWeek;
+        private int mFocusedMonth;
         private int mTotalWeekCount;
 
         public WeeksAdapter(Context context)
@@ -1590,6 +1527,14 @@ public class HighlightCalendarView extends FrameLayout
         }
 
         /**
+         * @return The selected day of month.
+         */
+        public Calendar getSelectedDay()
+        {
+            return mSelectedDate;
+        }
+
+        /**
          * Updates the selected day and related parameters.
          *
          * @param selectedDay The time to highlight
@@ -1605,14 +1550,6 @@ public class HighlightCalendarView extends FrameLayout
             mSelectedWeek = getWeeksSinceMinDate(mSelectedDate);
             mFocusedMonth = mSelectedDate.get(Calendar.MONTH);
             notifyDataSetChanged();
-        }
-
-        /**
-         * @return The selected day of month.
-         */
-        public Calendar getSelectedDay()
-        {
-            return mSelectedDate;
         }
 
         @Override

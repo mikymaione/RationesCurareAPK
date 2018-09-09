@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import java.util.Date;
-
 import it.mikymaione.RationesCurare.DB.Tables.utenti;
 import it.mikymaione.RationesCurare.DB.Wrappers.cUtenti;
 import it.mikymaione.RationesCurare.Globals.GB;
