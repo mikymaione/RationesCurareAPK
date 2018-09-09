@@ -1,17 +1,12 @@
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_Annulla"
-        android:title="@string/action_Annulla"
-        android:showAsAction="always"
         android:icon="@drawable/arrow_undo"
-        />
+        android:showAsAction="always"
+        android:title="@string/action_Annulla" />
     <item
         android:id="@+id/action_nuovo"
-        android:title="@string/action_nuovo"
-        android:showAsAction="always"
         android:icon="@drawable/add"
-        />
+        android:showAsAction="always"
+        android:title="@string/action_nuovo" />
 </menu>

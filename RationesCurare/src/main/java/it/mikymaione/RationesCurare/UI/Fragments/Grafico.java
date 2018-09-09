@@ -38,7 +38,7 @@ public class Grafico extends baseDB
         String r = (Annuale ? "annuale" : "mensile");
         cMovimenti m = new cMovimenti(DB);
 
-        return "Grafico " + r + ": " + GB.DoubleToEuro(m.Saldo());
+        return r.substring(0, 4) + "…: " + GB.DoubleToEuro(m.Saldo());
     }
 
     @Override

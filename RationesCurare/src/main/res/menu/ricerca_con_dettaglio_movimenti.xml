@@ -1,53 +1,41 @@
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <item
-        android:id="@+id/action_Annulla"
-        android:title="@string/action_Annulla"
-        android:showAsAction="always"
-        android:icon="@drawable/arrow_undo"
-        />
-    <item
-        android:id="@+id/action_nuovo"
-        android:title="@string/action_nuovo"
-        android:showAsAction="always"
-        android:icon="@drawable/add"
-        />
-    <item
-        android:id="@+id/action_Giroconto"
-        android:title="@string/action_Giroconto"
-        android:showAsAction="always"
-        android:icon="@drawable/giroconto"
-        />
-
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/a_More"
-        android:showAsAction="always"
         android:icon="@drawable/menu"
+        android:showAsAction="always"
         android:title="Altro">
         <menu>
-
+            <item
+                android:id="@+id/action_Annulla"
+                android:icon="@drawable/arrow_undo"
+                android:showAsAction="always"
+                android:title="@string/action_Annulla" />
+            <item
+                android:id="@+id/action_nuovo"
+                android:icon="@drawable/add"
+                android:showAsAction="always"
+                android:title="@string/action_nuovo" />
+            <item
+                android:id="@+id/action_Giroconto"
+                android:icon="@drawable/giroconto"
+                android:showAsAction="always"
+                android:title="@string/action_Giroconto" />
             <item
                 android:id="@+id/action_Periodico"
-                android:title="@string/action_Periodico"
-                android:showAsAction="never"
                 android:icon="@drawable/periodici"
-                />
+                android:showAsAction="never"
+                android:title="@string/action_Periodico" />
             <item
                 android:id="@+id/action_modifica"
-                android:title="@string/action_modifica"
-                android:showAsAction="never"
                 android:icon="@drawable/application_edit"
-                />
+                android:showAsAction="never"
+                android:title="@string/action_modifica" />
 
             <item
                 android:id="@+id/action_Elimina"
-                android:title="@string/action_Elimina"
-                android:showAsAction="never"
                 android:icon="@drawable/delete"
-                />
+                android:showAsAction="never"
+                android:title="@string/action_Elimina" />
 
         </menu>
     </item>

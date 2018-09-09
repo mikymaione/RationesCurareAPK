@@ -44,15 +44,15 @@ public class Movimenti extends baseRicerca<Integer>
         if (ricerca == null)
         {
             d = m.SaldoByTipo(cassa);
-            r = cassa;
+            r = cassa.substring(0, 4) + '…';
         }
         else
         {
             d = m.SaldoByParams(getParams());
-            r = "Risultato ricerca";
+            r = "Cerca";
         }
 
-        //r += GB.DoubleToEuro(d);
+        r += ": " + GB.DoubleToEuro(d);
 
         return r;
     }

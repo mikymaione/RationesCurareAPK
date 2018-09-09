@@ -1,50 +1,39 @@
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <group
-        android:id="@+id/ControlliSpostamento"
-        >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/ControlliSpostamento">
         <item
             android:id="@+id/action_AnnoPrecedente"
             android:title="@string/action_AnnoPrecedente"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_first"
-            />
+            android:icon="@drawable/resultset_first" />
 
         <item
             android:id="@+id/action_MesePrecedente"
             android:title="@string/action_MesePrecedente"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_previous"
-            />
+            android:icon="@drawable/resultset_previous" />
 
         <item
             android:id="@+id/action_Oggi"
             android:title="@string/action_Oggi"
             android:showAsAction="always"
-            android:icon="@drawable/calendar_view_today"
-            />
+            android:icon="@drawable/calendar_view_today" />
 
         <item
             android:id="@+id/action_MeseSuccessivo"
             android:title="@string/action_MeseSuccessivo"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_next"
-            />
+            android:icon="@drawable/resultset_next" />
 
         <item
             android:id="@+id/action_AnnoSuccessivo"
             android:title="@string/action_AnnoSuccessivo"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_last"
-            />
+            android:icon="@drawable/resultset_last" />
     </group>
 
     <item
         android:id="@+id/action_nuovo"
         android:title="@string/action_nuovo"
         android:showAsAction="always"
-        android:icon="@drawable/add"
-        />
+        android:icon="@drawable/add" />
 </menu>

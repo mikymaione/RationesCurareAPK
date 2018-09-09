@@ -333,9 +333,24 @@ public class GB
 
     public static String DoubleToEuro(Double o)
     {
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        //NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        //return currencyFormatter.format(o);
+        String r = "0";
 
-        return currencyFormatter.format(o);
+        try
+        {
+            NumberFormat numberFormatter = NumberFormat.getNumberInstance();
+            r = numberFormatter.format(o);
+        }
+        catch (Exception ex)
+        {
+            r = "0";
+        }
+
+        if (r.equals("-0"))
+            r = "0";
+
+        return r;
     }
 
     public static Integer StringToInteger(String s)

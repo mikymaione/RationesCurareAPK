@@ -1,31 +1,25 @@
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_Annulla"
         android:title="@string/action_Annulla"
         android:showAsAction="always"
-        android:icon="@drawable/arrow_undo"
-        />
+        android:icon="@drawable/arrow_undo" />
     <item
         android:id="@+id/action_Pulisci"
         android:title="@string/action_Pulisci"
         android:showAsAction="always"
-        android:icon="@drawable/broom"
-        />
+        android:icon="@drawable/broom" />
 
     <item
         android:id="@+id/action_Salva"
         android:title="@string/action_Salva"
         android:showAsAction="always"
-        android:icon="@drawable/disk"
-        />
+        android:icon="@drawable/disk" />
 
     <item
         android:id="@+id/action_Elimina"
         android:title="@string/action_Elimina"
         android:showAsAction="always"
-        android:icon="@drawable/delete"
-        />
+        android:icon="@drawable/delete" />
 </menu>
