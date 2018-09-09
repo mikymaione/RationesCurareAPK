@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.mikymaione.RationesCurare.UI.Fragments.Calendario_Dettaglio"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:singleLine="true"
+        android:id="@+id/textView3"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:id="@+id/eData"
+        android:maxLength="10"
+        android:text="12/12/2000"
+        android:editable="false"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descrizione"
+        android:singleLine="true"
+        android:id="@+id/textView6"
+        />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Regalo a Nadia Riccardi"
+        android:id="@+id/eDescrizione"
+        android:maxLength="255"
+        android:singleLine="true"/>
+
+</LinearLayout>

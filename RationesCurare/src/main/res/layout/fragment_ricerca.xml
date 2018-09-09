@@ -1,0 +1,167 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.mikymaione.RationesCurare.UI.Fragments.Ricerca"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:singleLine="true"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Da:"
+            android:singleLine="true"
+            />
+
+        <it.mikymaione.RationesCurare.UI.Editors.DateEditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:id="@+id/eDataDa"
+            android:text="12/12/2000"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A:"
+            android:singleLine="true"
+            />
+
+        <it.mikymaione.RationesCurare.UI.Editors.DateEditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:id="@+id/eDataA"
+            android:text="12/12/2000"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:editable="false"
+            android:clickable="true"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Importo"
+        android:singleLine="true"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Da:"
+            android:singleLine="true"
+            />
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned|numberDecimal"
+            android:singleLine="true"
+            android:maxLength="15"
+            android:id="@+id/eSoldiDa"
+            android:text="2000"
+            android:numeric="signed|decimal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A:"
+            android:singleLine="true"
+            />
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned|numberDecimal"
+            android:singleLine="true"
+            android:maxLength="15"
+            android:id="@+id/eSoldiA"
+            android:text="2000"
+            android:numeric="signed|decimal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Macro area"
+                android:singleLine="true"
+                />
+
+            <AutoCompleteTextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Regali"
+                android:maxLength="250"
+                android:id="@+id/eMacroArea"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrizione"
+                android:singleLine="true"
+                />
+
+            <AutoCompleteTextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Regalo a Nadia Riccardi"
+                android:maxLength="1000"
+                android:id="@+id/eDescrizione"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cassa"
+        android:singleLine="true"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eCassa"/>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.mikymaione.RationesCurare.UI.Fragments.GestioneCasse_Dettaglio"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:singleLine="true"
+        android:id="@+id/textView"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Michele"
+        android:id="@+id/eNome"
+        android:maxLength="20"
+        android:singleLine="true"
+        />
+</LinearLayout>

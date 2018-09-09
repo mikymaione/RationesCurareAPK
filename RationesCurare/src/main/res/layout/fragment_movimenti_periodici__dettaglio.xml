@@ -1,0 +1,205 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="it.mikymaione.RationesCurare.UI.Fragments.MovimentiPeriodici_Dettaglio"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Michele"
+                android:maxLength="255"
+                android:id="@+id/eNome"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soldi"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned|numberDecimal"
+                android:singleLine="true"
+                android:maxLength="15"
+                android:id="@+id/eSoldi"
+                android:text="2000"
+                android:numeric="signed|decimal"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrizione"
+                android:singleLine="true"
+                />
+
+            <AutoCompleteTextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Regalo a Nadia Riccardi"
+                android:maxLength="1000"
+                android:completionThreshold="1"
+                android:id="@+id/eDescrizione"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Macro area"
+                android:singleLine="true"
+                />
+
+            <AutoCompleteTextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Regali"
+                android:maxLength="250"
+                android:completionThreshold="1"
+                android:id="@+id/eMacroArea"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cassa"
+            android:singleLine="true"
+            />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eCassa"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Periodicità"
+            android:singleLine="true"
+            />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eTipoGiorniMese"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ogni numero giorni"
+            android:singleLine="true"
+            />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLength="2"
+            android:id="@+id/eNumeroGiorni"
+            android:text="30"
+            android:numeric="integer"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giorno fisso del mese"
+            android:singleLine="true"
+            />
+
+        <it.mikymaione.RationesCurare.UI.Editors.DateEditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:id="@+id/eGiornoDelMese"
+            android:text="12/12/2000"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scadenza"
+            android:singleLine="true"
+            />
+
+        <it.mikymaione.RationesCurare.UI.Editors.DateEditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:id="@+id/eScadenza"
+            android:text="12/12/2000"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

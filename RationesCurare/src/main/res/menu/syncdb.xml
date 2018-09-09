@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_Sincronizza"
+        android:title="@string/action_Sincronizza"
+        android:showAsAction="always"
+        android:icon="@drawable/database_refresh"
+    />
+</menu>

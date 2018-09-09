@@ -1,0 +1,18 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/action_Mensile"
+        android:title="@string/action_Mensile"
+        android:showAsAction="always"
+        android:icon="@drawable/calendar_view_month"
+        />
+
+    <item
+        android:id="@+id/action_Annuale"
+        android:title="@string/action_Annuale"
+        android:showAsAction="always"
+        android:icon="@drawable/calendar_view_year"
+        />
+</menu>

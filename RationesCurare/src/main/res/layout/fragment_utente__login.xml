@@ -1,0 +1,50 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.mikymaione.RationesCurare.UI.Fragments.Utente_Login"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Benvenuto in RationesCurare, il software per la gestione della piccola contabilità!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textIsSelectable="false"
+        android:id="@+id/welcome1"
+        android:textSize="14dp"/>    
+
+    <TextView
+        android:text="Credenziali per la sincronizzazione cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:text="Email:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:id="@+id/eEmail"
+        android:singleLine="true"
+        android:maxLength="80"/>
+
+    <TextView
+        android:text="Psw:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/ePsw"
+        android:maxLength="255"
+        android:singleLine="true"/>
+
+</LinearLayout>

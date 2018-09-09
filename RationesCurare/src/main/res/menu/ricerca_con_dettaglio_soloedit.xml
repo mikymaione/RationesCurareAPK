@@ -1,0 +1,25 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/action_Annulla"
+        android:title="@string/action_Annulla"
+        android:showAsAction="always"
+        android:icon="@drawable/arrow_undo"
+        />
+
+    <item
+        android:id="@+id/action_modifica"
+        android:title="@string/action_modifica"
+        android:showAsAction="always"
+        android:icon="@drawable/application_edit"
+        />
+
+    <item
+        android:id="@+id/action_Elimina"
+        android:title="@string/action_Elimina"
+        android:showAsAction="always"
+        android:icon="@drawable/delete"
+        />
+</menu>

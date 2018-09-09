@@ -1,0 +1,18 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/action_Cerca"
+        android:title="@string/action_Cerca"
+        android:showAsAction="always"
+        android:icon="@drawable/zoom"
+        />
+
+    <item
+        android:id="@+id/action_dettaglio"
+        android:title="@string/action_dettaglio"
+        android:showAsAction="always"
+        android:icon="@drawable/application_edit"
+        />
+</menu>

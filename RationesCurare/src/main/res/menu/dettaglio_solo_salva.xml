@@ -1,0 +1,18 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/action_Pulisci"
+        android:title="@string/action_Pulisci"
+        android:showAsAction="always"
+        android:icon="@drawable/broom"
+        />
+
+    <item
+        android:id="@+id/action_Salva"
+        android:title="@string/action_Salva"
+        android:showAsAction="always"
+        android:icon="@drawable/disk"
+        />
+</menu>
