@@ -74,7 +74,7 @@ public abstract class cTabella<T extends baseTabellaDB, V>
 
     public ArrayList<Object[]> ToArrayListOfObjects(String[] fields_name, ArrayList<?> l)
     {
-        ArrayList<Object[]> r = new ArrayList<Object[]>();
+        ArrayList<Object[]> r = new ArrayList<>();
 
         for (Object e : l)
         {
@@ -101,7 +101,8 @@ public abstract class cTabella<T extends baseTabellaDB, V>
 
                     try
                     {
-                        m = gc.getMethod(fields_name[i], null);
+                        //m = gc.getMethod(fields_name[i], null);
+                        m = gc.getMethod(fields_name[i], new Class<?>[0]);
                     }
                     catch (Exception e2)
                     {

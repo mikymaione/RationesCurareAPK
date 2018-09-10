@@ -1,6 +1,6 @@
-# RationesCurareAPK
-RationesCurare for Android
 
+# RationesCurareAPK
+<img src="http://www.maionemiky.it/images/RC.png" alt="logo" /> RationesCurare for Android
 
 
 ## IDE
