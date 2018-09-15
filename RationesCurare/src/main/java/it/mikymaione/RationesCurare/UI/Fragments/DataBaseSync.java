@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -216,27 +218,14 @@ public class DataBaseSync extends baseDB
         }
     }
 
-    private String ComparaDB()
+    private String ComparaDB() throws IOException, XmlPullParserException
     {
-        try
-        {
-            cUtenti c = new cUtenti(DB);
-            utenti u = c.Carica();
+        cUtenti c = new cUtenti(DB);
+        utenti u = c.Carica();
 
-            ComparaDBRC comparaDBRC = new ComparaDBRC(u.UltimaModifica, u.Email, u.psw);
-            String comp = comparaDBRC.Call();
+        ComparaDBRC comparaDBRC = new ComparaDBRC(u.UltimaModifica, u.Email, u.psw);
 
-            if (comp != null && comp.length() > 0)
-            {
-                return comp;
-            }
-        }
-        catch (Exception e)
-        {
-            //errore
-        }
-
-        return "";
+        return comparaDBRC.Call();
     }
 
     private class AsyncUpload extends AsyncTask
@@ -251,9 +240,7 @@ public class DataBaseSync extends baseDB
         protected void onPostExecute(Object o)
         {
             if (o != null)
-            {
                 GB.MsgBox(getActivity(), "Informazione", o.toString());
-            }
 
             ProgressDialog_.dismiss();
             inEsecuzione = false;
@@ -266,7 +253,14 @@ public class DataBaseSync extends baseDB
         @Override
         protected Object doInBackground(Object[] objects)
         {
-            return ComparaDB();
+            try
+            {
+                return ComparaDB();
+            }
+            catch (Exception e)
+            {
+                return e.getMessage();
+            }
         }
 
         @Override
