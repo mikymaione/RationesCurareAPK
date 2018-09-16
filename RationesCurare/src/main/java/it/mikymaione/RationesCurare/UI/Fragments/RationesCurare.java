@@ -21,8 +21,10 @@ import it.mikymaione.RationesCurare.DB.Wrappers.cUtenti;
 import it.mikymaione.RationesCurare.DB.cDB;
 import it.mikymaione.RationesCurare.Globals.GB;
 import it.mikymaione.RationesCurare.Globals.PB;
+import it.mikymaione.RationesCurare.Globals.cDataBaseSync;
 import it.mikymaione.RationesCurare.Globals.cErrore;
 import it.mikymaione.RationesCurare.Globals.cOggiDomani;
+import it.mikymaione.RationesCurare.Globals.iDataBaseSync;
 import it.mikymaione.RationesCurare.R;
 import it.mikymaione.RationesCurare.UI.Templates.baseFragment;
 
@@ -39,15 +41,28 @@ public class RationesCurare extends Activity implements MenuATendina.NavigationD
         RiempiHashMenu();
 
         //init the DB
-        new cDB(getAssets(), getExternalFilesDir(null));
+        cDB DB = new cDB(getAssets(), getExternalFilesDir(null));
 
-        setContentView(R.layout.activity_rationes_curare);
+        //aggiorna DB
+        cDataBaseSync DBSync = new cDataBaseSync(this, DB, false);
 
-        MenuATendina mMenuATendina = (MenuATendina) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mMenuATendina.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        DBSync.addListener(new iDataBaseSync()
+        {
+            @Override
+            public void DataBaseSyn_Done()
+            {
+                setContentView(R.layout.activity_rationes_curare);
 
-        ControllaEventi();
-        ControllaPeriodici();
+                MenuATendina mMenuATendina = (MenuATendina) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+                mMenuATendina.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+                ControllaEventi();
+                ControllaPeriodici();
+            }
+        });
+
+        DBSync.AvviaSincronizzaDB();
+        //aggiorna DB
     }
 
     private void RiempiHashMenu()
