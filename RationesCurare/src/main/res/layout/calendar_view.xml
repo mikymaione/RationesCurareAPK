@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* Copyright 2010, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License")
@@ -20,13 +19,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true" >
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/month_name"
@@ -45,7 +44,7 @@
             android:layout_marginLeft="2dip"
             android:layout_marginRight="2dip"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dip"
@@ -122,6 +121,6 @@
         android:layout_centerInParent="true"
         android:layout_margin="12dp"
         android:padding="12dp"
-        tools:layout="@layout/event_menu"/>
+        tools:layout="@layout/event_menu" />
 
 </RelativeLayout>

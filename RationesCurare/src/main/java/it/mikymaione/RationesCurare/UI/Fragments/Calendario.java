@@ -31,6 +31,7 @@ public class Calendario extends baseDB
     private it.mikymaione.RationesCurare.DB.Tables.Calendario Selezionato;
     private Calendar DataCorrente = Calendar.getInstance();
 
+
     @Override
     public CharSequence GetTitolo()
     {
@@ -47,12 +48,10 @@ public class Calendario extends baseDB
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         MyView = super.onCreateView(inflater, container, savedInstanceState);
-
-        calendario = (HighlightCalendarView) MyView.findViewById(R.id.calendario);
+        calendario = MyView.findViewById(R.id.calendario);
 
         calendario.setOnDateSelectedListener(new HighlightCalendarView.OnDateSelectedListener()
         {
-
             @Override
             public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth)
             {
@@ -81,7 +80,6 @@ public class Calendario extends baseDB
             {
                 //
             }
-
         });
 
         Carica();
@@ -95,33 +93,19 @@ public class Calendario extends baseDB
         int z = item.getItemId();
 
         if (z == R.id.action_AnnoPrecedente)
-        {
             Vai(R.id.action_AnnoPrecedente);
-        }
         else if (z == R.id.action_AnnoSuccessivo)
-        {
             Vai(R.id.action_AnnoSuccessivo);
-        }
         else if (z == R.id.action_MesePrecedente)
-        {
             Vai(R.id.action_MesePrecedente);
-        }
         else if (z == R.id.action_MeseSuccessivo)
-        {
             Vai(R.id.action_MeseSuccessivo);
-        }
         else if (z == R.id.action_Oggi)
-        {
             Vai(R.id.action_Oggi);
-        }
         else if (z == R.id.action_nuovo)
-        {
             Dettaglio(true);
-        }
         else
-        {
             return super.onOptionsItemSelected(item);
-        }
 
         return true;
     }
@@ -129,7 +113,7 @@ public class Calendario extends baseDB
     @Override
     protected View GetFirstControlToFocus()
     {
-        return null;
+        return calendario;
     }
 
     private void Carica()
@@ -144,17 +128,11 @@ public class Calendario extends baseDB
         Integer ID_ = -1;
 
         if (!nuovo)
-        {
             if (Selezionato != null)
-            {
                 ID_ = Selezionato.ID;
-            }
-        }
 
         if (ID_ != null)
-        {
             GB.NavigateTo(this, PB.newCalendario_Dettaglio(this, ePosizione.Calendario, ID_, DataCorrente), ePosizione.Calendario_Dettaglio);
-        }
     }
 
     private void Vai(int d)
@@ -169,21 +147,13 @@ public class Calendario extends baseDB
         else
         {
             if (d == R.id.action_AnnoPrecedente)
-            {
                 DataCorrente.add(Calendar.YEAR, -1);
-            }
             else if (d == R.id.action_AnnoSuccessivo)
-            {
                 DataCorrente.add(Calendar.YEAR, 1);
-            }
             else if (d == R.id.action_MesePrecedente)
-            {
                 DataCorrente.add(Calendar.MONTH, -1);
-            }
             else if (d == R.id.action_MeseSuccessivo)
-            {
                 DataCorrente.add(Calendar.MONTH, 1);
-            }
         }
 
         calendario.setDate(DataCorrente.getTimeInMillis(), true, true);

@@ -1,16 +1,4 @@
 /*
-MIT License
-Copyright (c) 2018 Michele Maione
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-/**
- *
- */
-package it.mikymaione.RationesCurare.UI.CalendarControl;
-
-/*
  * Copyright (C) 2010 The Android Open Source Project
  * Amended to mark events on the days. (C) 2013 M. Ritscher
  *
@@ -26,7 +14,7 @@ package it.mikymaione.RationesCurare.UI.CalendarControl;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+package it.mikymaione.RationesCurare.UI.CalendarControl;
 
 import android.app.AlertDialog;
 import android.app.Service;
@@ -193,7 +181,7 @@ public class HighlightCalendarView extends FrameLayout
     /**
      * The event store
      */
-    private final SparseArray<List<DateEvent>> mEvents = new SparseArray<List<DateEvent>>();
+    private final SparseArray<List<DateEvent>> mEvents = new SparseArray<>();
     private Calendar CurrentDate;
     private int mDateTextSize;
     private Drawable mSelectedDateVerticalBar;
@@ -287,7 +275,6 @@ public class HighlightCalendarView extends FrameLayout
         this(context, null);
     }
 
-
     public HighlightCalendarView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
@@ -301,70 +288,48 @@ public class HighlightCalendarView extends FrameLayout
         // initialization based on locale
         setCurrentLocale(Locale.getDefault());
 
-        final TypedArray attributesArray = context.obtainStyledAttributes(attrs, R.styleable.CalendarView,
-                android.R.attr.calendarViewStyle, 0);
+        final TypedArray attributesArray = context.obtainStyledAttributes(attrs, R.styleable.CalendarView, android.R.attr.calendarViewStyle, 0);
 
         mShowWeekNumber = attributesArray.getBoolean(R.styleable.CalendarView_android_showWeekNumber, DEFAULT_SHOW_WEEK_NUMBER);
         mFirstDayOfWeek = attributesArray.getInt(R.styleable.CalendarView_android_firstDayOfWeek, Calendar.getInstance(Locale.getDefault()).getFirstDayOfWeek());
 
         String minDate = attributesArray.getString(R.styleable.CalendarView_android_minDate);
         if (TextUtils.isEmpty(minDate) || !parseDate(minDate, mMinDate))
-        {
             parseDate(DEFAULT_MIN_DATE, mMinDate);
-        }
+
         String maxDate = attributesArray.getString(R.styleable.CalendarView_android_maxDate);
         if (TextUtils.isEmpty(maxDate) || !parseDate(maxDate, mMaxDate))
-        {
             parseDate(DEFAULT_MAX_DATE, mMaxDate);
-        }
 
         if (mMaxDate.before(mMinDate))
-        {
             throw new IllegalArgumentException("Max date cannot be before min date.");
-        }
-        mShownWeekCount = attributesArray.getInt(R.styleable.CalendarView_android_shownWeekCount,
-                DEFAULT_SHOWN_WEEK_COUNT);
-        mSelectedWeekBackgroundColor = attributesArray.getColor(
-                R.styleable.CalendarView_android_selectedWeekBackgroundColor, 0);
-        mFocusedMonthDateColor = attributesArray.getColor(
-                R.styleable.CalendarView_android_focusedMonthDateColor, 0);
-        mUnfocusedMonthDateColor = attributesArray.getColor(
-                R.styleable.CalendarView_android_unfocusedMonthDateColor, 0);
-        mWeekSeparatorLineColor = attributesArray.getColor(
-                R.styleable.CalendarView_android_weekSeparatorLineColor, 0);
+
+        mShownWeekCount = attributesArray.getInt(R.styleable.CalendarView_android_shownWeekCount, DEFAULT_SHOWN_WEEK_COUNT);
+        mSelectedWeekBackgroundColor = attributesArray.getColor(R.styleable.CalendarView_android_selectedWeekBackgroundColor, 0);
+        mFocusedMonthDateColor = attributesArray.getColor(R.styleable.CalendarView_android_focusedMonthDateColor, 0);
+        mUnfocusedMonthDateColor = attributesArray.getColor(R.styleable.CalendarView_android_unfocusedMonthDateColor, 0);
+        mWeekSeparatorLineColor = attributesArray.getColor(R.styleable.CalendarView_android_weekSeparatorLineColor, 0);
         mWeekNumberColor = attributesArray.getColor(R.styleable.CalendarView_android_weekNumberColor, 0);
-        mSelectedDateVerticalBar = attributesArray.getDrawable(
-                R.styleable.CalendarView_android_selectedDateVerticalBar);
+        mSelectedDateVerticalBar = attributesArray.getDrawable(R.styleable.CalendarView_android_selectedDateVerticalBar);
 
-
-        mDateTextAppearanceResId = attributesArray.getResourceId(
-                R.styleable.CalendarView_android_dateTextAppearance, android.R.style.TextAppearance_Small);
+        mDateTextAppearanceResId = attributesArray.getResourceId(R.styleable.CalendarView_android_dateTextAppearance, android.R.style.TextAppearance_Small);
         updateDateTextSize();
-        mWeekDayTextAppearanceResId = attributesArray.getResourceId(
-                R.styleable.CalendarView_android_weekDayTextAppearance,
-                DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID);
+
+        mWeekDayTextAppearanceResId = attributesArray.getResourceId(R.styleable.CalendarView_android_weekDayTextAppearance, DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID);
         attributesArray.recycle();
 
         final TypedArray attributesArray1 = context.obtainStyledAttributes(attrs, R.styleable.HighlightCalendarView);
-        mEventBarColor = attributesArray1.getColor(
-                R.styleable.HighlightCalendarView_eventBarColor,
-                0xFFA01010);
+        mEventBarColor = attributesArray1.getColor(R.styleable.HighlightCalendarView_eventBarColor, 0xFFA01010);
         attributesArray1.recycle();
 
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        mWeekMinVisibleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                UNSCALED_WEEK_MIN_VISIBLE_HEIGHT, displayMetrics);
-        mListScrollTopOffset = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                UNSCALED_LIST_SCROLL_TOP_OFFSET, displayMetrics);
-        mBottomBuffer = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                UNSCALED_BOTTOM_BUFFER, displayMetrics);
-        mWeekSeperatorLineWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                UNSCALED_WEEK_SEPARATOR_LINE_WIDTH, displayMetrics);
-        mSelectedDateVerticalBarWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                UNSCALED_SELECTED_DATE_VERTICAL_BAR_WIDTH, displayMetrics);
+        mWeekMinVisibleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNSCALED_WEEK_MIN_VISIBLE_HEIGHT, displayMetrics);
+        mListScrollTopOffset = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNSCALED_LIST_SCROLL_TOP_OFFSET, displayMetrics);
+        mBottomBuffer = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNSCALED_BOTTOM_BUFFER, displayMetrics);
+        mWeekSeperatorLineWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNSCALED_WEEK_SEPARATOR_LINE_WIDTH, displayMetrics);
+        mSelectedDateVerticalBarWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, UNSCALED_SELECTED_DATE_VERTICAL_BAR_WIDTH, displayMetrics);
 
-        final LayoutInflater layoutInflater = (LayoutInflater) mContext
-                .getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
         final View content = layoutInflater.inflate(R.layout.calendar_view, null, false);
         addView(content);
 
@@ -378,18 +343,13 @@ public class HighlightCalendarView extends FrameLayout
 
         // go to today or whichever is close to today min or max date
         mTempDate.setTimeInMillis(System.currentTimeMillis());
+
         if (mTempDate.before(mMinDate))
-        {
             goTo(mMinDate, false, true, true);
-        }
         else if (mMaxDate.before(mTempDate))
-        {
             goTo(mMaxDate, false, true, true);
-        }
         else
-        {
             goTo(mTempDate, false, true, true);
-        }
 
         invalidate();
     }
@@ -443,13 +403,13 @@ public class HighlightCalendarView extends FrameLayout
         {
             mSelectedWeekBackgroundColor = color;
             final int childCount = mListView.getChildCount();
+
             for (int i = 0; i < childCount; i++)
             {
                 final WeekView weekView = (WeekView) mListView.getChildAt(i);
+
                 if (weekView.mHasSelectedDay)
-                {
                     weekView.invalidate();
-                }
             }
         }
     }
@@ -477,13 +437,13 @@ public class HighlightCalendarView extends FrameLayout
         {
             mFocusedMonthDateColor = color;
             final int childCount = mListView.getChildCount();
+
             for (int i = 0; i < childCount; i++)
             {
                 final WeekView weekView = (WeekView) mListView.getChildAt(i);
+
                 if (weekView.mHasFocusedDay)
-                {
                     weekView.invalidate();
-                }
             }
         }
     }
@@ -511,13 +471,13 @@ public class HighlightCalendarView extends FrameLayout
         {
             mUnfocusedMonthDateColor = color;
             final int childCount = mListView.getChildCount();
+
             for (int i = 0; i < childCount; i++)
             {
                 final WeekView weekView = (WeekView) mListView.getChildAt(i);
+
                 if (weekView.mHasUnfocusedDay)
-                {
                     weekView.invalidate();
-                }
             }
         }
     }
@@ -544,10 +504,9 @@ public class HighlightCalendarView extends FrameLayout
         if (mWeekNumberColor != color)
         {
             mWeekNumberColor = color;
+
             if (mShowWeekNumber)
-            {
                 invalidateAllWeekViews();
-            }
         }
     }
 
@@ -691,21 +650,21 @@ public class HighlightCalendarView extends FrameLayout
     {
         mTempDate.setTimeInMillis(minDate);
         if (isSameDate(mTempDate, mMinDate))
-        {
             return;
-        }
+
         mMinDate.setTimeInMillis(minDate);
         // make sure the current date is not earlier than
         // the new min date since the latter is used for
         // calculating the indices in the adapter thus
         // avoiding out of bounds error
         final Calendar date = mAdapter.mSelectedDate;
+
         if (date.before(mMinDate))
-        {
             mAdapter.setSelectedDay(mMinDate);
-        }
+
         // reinitialize the adapter since its range depends on min date
         mAdapter.init();
+
         if (date.before(mMinDate))
         {
             setDate(mTempDate.getTimeInMillis());
@@ -747,14 +706,16 @@ public class HighlightCalendarView extends FrameLayout
     public void setMaxDate(long maxDate)
     {
         mTempDate.setTimeInMillis(maxDate);
+
         if (isSameDate(mTempDate, mMaxDate))
-        {
             return;
-        }
+
         mMaxDate.setTimeInMillis(maxDate);
         // reinitialize the adapter since its range depends on max date
         mAdapter.init();
+
         final Calendar date = mAdapter.mSelectedDate;
+
         if (date.after(mMaxDate))
         {
             setDate(mMaxDate.getTimeInMillis());
@@ -789,11 +750,11 @@ public class HighlightCalendarView extends FrameLayout
     public void setShowWeekNumber(boolean showWeekNumber)
     {
         if (mShowWeekNumber == showWeekNumber)
-        {
             return;
-        }
+
         mShowWeekNumber = showWeekNumber;
         mAdapter.notifyDataSetChanged();
+
         setUpHeader();
     }
 
@@ -833,12 +794,12 @@ public class HighlightCalendarView extends FrameLayout
     public void setFirstDayOfWeek(int firstDayOfWeek)
     {
         if (mFirstDayOfWeek == firstDayOfWeek)
-        {
             return;
-        }
+
         mFirstDayOfWeek = firstDayOfWeek;
         mAdapter.init();
         mAdapter.notifyDataSetChanged();
+
         setUpHeader();
     }
 
@@ -894,10 +855,10 @@ public class HighlightCalendarView extends FrameLayout
     public void setDate(long date, boolean animate, boolean center)
     {
         mTempDate.setTimeInMillis(date);
+
         if (isSameDate(mTempDate, mAdapter.mSelectedDate))
-        {
             return;
-        }
+
         goTo(mTempDate, animate, true, center);
     }
 
@@ -921,11 +882,10 @@ public class HighlightCalendarView extends FrameLayout
 
             List<DateEvent> daysEvents;
             if (lastDay > 0 && dayHash != getDateHash(lastDay))
-            {
                 daysEvents = mEvents.get(getDateHash(lastDay), null);
-            }
 
             daysEvents = mEvents.get(dayHash, null);
+
             if (daysEvents == null)
             {
                 daysEvents = new ArrayList<DateEvent>();
@@ -937,9 +897,7 @@ public class HighlightCalendarView extends FrameLayout
         }
 
         if (!events.isEmpty())
-        {
             mAdapter.notifyDataSetChanged();
-        }
     }
 
     /**
@@ -998,9 +956,7 @@ public class HighlightCalendarView extends FrameLayout
     private void setCurrentLocale(Locale locale)
     {
         if (locale.equals(mCurrentLocale))
-        {
             return;
-        }
 
         mCurrentLocale = locale;
         mTempDate = getCalendarForLocale(mTempDate, locale);
@@ -1025,7 +981,9 @@ public class HighlightCalendarView extends FrameLayout
         {
             final long currentTimeMillis = oldCalendar.getTimeInMillis();
             final Calendar newCalendar = Calendar.getInstance(locale);
+
             newCalendar.setTimeInMillis(currentTimeMillis);
+
             return newCalendar;
         }
     }
@@ -1036,8 +994,7 @@ public class HighlightCalendarView extends FrameLayout
      */
     private boolean isSameDate(Calendar firstDate, Calendar secondDate)
     {
-        return (firstDate.get(Calendar.DAY_OF_YEAR) == secondDate.get(Calendar.DAY_OF_YEAR)
-                && firstDate.get(Calendar.YEAR) == secondDate.get(Calendar.YEAR));
+        return (firstDate.get(Calendar.DAY_OF_YEAR) == secondDate.get(Calendar.DAY_OF_YEAR) && firstDate.get(Calendar.YEAR) == secondDate.get(Calendar.YEAR));
     }
 
     /**
@@ -1061,29 +1018,28 @@ public class HighlightCalendarView extends FrameLayout
     private void setUpHeader()
     {
         mDayLabels = new String[mDaysPerWeek];
+
         for (int i = mFirstDayOfWeek, count = mFirstDayOfWeek + mDaysPerWeek; i < count; i++)
         {
             final int calendarDay = (i > Calendar.SATURDAY) ? i - Calendar.SATURDAY : i;
-            mDayLabels[i - mFirstDayOfWeek] = DateUtils.getDayOfWeekString(calendarDay,
-                    DateUtils.LENGTH_SHORTEST);
+
+            mDayLabels[i - mFirstDayOfWeek] = DateUtils.getDayOfWeekString(calendarDay, DateUtils.LENGTH_SHORTEST);
         }
 
         TextView label = (TextView) mDayNamesHeader.getChildAt(0);
+
         if (mShowWeekNumber)
-        {
             label.setVisibility(View.VISIBLE);
-        }
         else
-        {
             label.setVisibility(View.GONE);
-        }
+
         for (int i = 1, count = mDayNamesHeader.getChildCount(); i < count; i++)
         {
             label = (TextView) mDayNamesHeader.getChildAt(i);
+
             if (mWeekDayTextAppearanceResId > -1)
-            {
                 label.setTextAppearance(mContext, mWeekDayTextAppearanceResId);
-            }
+
             if (i < mDaysPerWeek + 1)
             {
                 label.setText(mDayLabels[i - 1]);
@@ -1115,18 +1071,15 @@ public class HighlightCalendarView extends FrameLayout
             }
 
             @Override
-            public void onScroll(
-                    AbsListView view, int firstVisibleItem, int visibleItemCount,
-                    int totalItemCount)
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
             {
-                HighlightCalendarView.this.onScroll(view, firstVisibleItem, visibleItemCount,
-                        totalItemCount);
+                HighlightCalendarView.this.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
             }
         });
+
         // Make the scrolling behavior nicer
         mListView.setFriction(mFriction);
         mListView.setVelocityScale(mVelocityScale);
-
     }
 
     /**
@@ -1148,33 +1101,29 @@ public class HighlightCalendarView extends FrameLayout
     private void goTo(Calendar date, boolean animate, boolean setSelected, boolean forceScroll)
     {
         if (date.before(mMinDate) || date.after(mMaxDate))
-        {
-            throw new IllegalArgumentException("Time not between " + mMinDate.getTime()
-                    + " and " + mMaxDate.getTime());
-        }
+            throw new IllegalArgumentException("Time not between " + mMinDate.getTime() + " and " + mMaxDate.getTime());
+
         // Find the first and last entirely visible weeks
         int firstFullyVisiblePosition = mListView.getFirstVisiblePosition();
         final View firstChild = mListView.getChildAt(0);
+
         if (firstChild != null && firstChild.getTop() < 0)
-        {
             firstFullyVisiblePosition++;
-        }
+
         int lastFullyVisiblePosition = firstFullyVisiblePosition + mShownWeekCount - 1;
+
         if (firstChild != null && firstChild.getTop() > mBottomBuffer)
-        {
             lastFullyVisiblePosition--;
-        }
+
         if (setSelected)
-        {
             mAdapter.setSelectedDay(date);
-        }
+
         // Get the week we're going to
         int position = getWeeksSinceMinDate(date);
 
         // Check if the selected day is now outside of our visible range
         // and if so scroll to the month that contains it
-        if (position < firstFullyVisiblePosition || position > lastFullyVisiblePosition
-                || forceScroll)
+        if (position < firstFullyVisiblePosition || position > lastFullyVisiblePosition || forceScroll)
         {
             mFirstDayOfMonth.setTimeInMillis(date.getTimeInMillis());
             mFirstDayOfMonth.set(Calendar.DAY_OF_MONTH, 1);
@@ -1183,19 +1132,15 @@ public class HighlightCalendarView extends FrameLayout
 
             // the earliest time we can scroll to is the min date
             if (mFirstDayOfMonth.before(mMinDate))
-            {
                 position = 0;
-            }
             else
-            {
                 position = getWeeksSinceMinDate(mFirstDayOfMonth);
-            }
 
             mPreviousScrollState = OnScrollListener.SCROLL_STATE_FLING;
+
             if (animate)
             {
-                mListView.smoothScrollToPositionFromTop(position, mListScrollTopOffset,
-                        GOTO_SCROLL_DURATION);
+                mListView.smoothScrollToPositionFromTop(position, mListScrollTopOffset, GOTO_SCROLL_DURATION);
             }
             else
             {
@@ -1244,14 +1189,12 @@ public class HighlightCalendarView extends FrameLayout
      * Updates the title and selected month if the <code>view</code> has moved to a new
      * month.
      */
-    private void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-                          int totalItemCount)
+    private void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
     {
         WeekView child = (WeekView) view.getChildAt(0);
+
         if (child == null)
-        {
             return;
-        }
 
         // Figure out where we are
         final long currScroll = view.getFirstVisiblePosition() * child.getHeight() - child.getBottom();
@@ -1275,6 +1218,7 @@ public class HighlightCalendarView extends FrameLayout
         // visible when scrolling up, and when the first day in a month reaches
         // the top of the screen when scrolling down.
         final int offset = child.getBottom() < mWeekMinVisibleHeight ? 1 : 0;
+
         if (mIsScrollingUp)
         {
             child = (WeekView) view.getChildAt(SCROLL_HYST_WEEKS + offset);
@@ -1323,6 +1267,7 @@ public class HighlightCalendarView extends FrameLayout
             {
                 firstDay.add(Calendar.DAY_OF_MONTH, DAYS_PER_WEEK);
             }
+
             setMonthDisplayed(firstDay);
         }
         mPreviousScrollPosition = currScroll;
@@ -1367,16 +1312,12 @@ public class HighlightCalendarView extends FrameLayout
     private int getWeeksSinceMinDate(Calendar date)
     {
         if (date.before(mMinDate))
-        {
-            throw new IllegalArgumentException("fromDate: " + mMinDate.getTime()
-                    + " does not precede toDate: " + date.getTime());
-        }
-        final long endTimeMillis = date.getTimeInMillis()
-                + date.getTimeZone().getOffset(date.getTimeInMillis());
-        final long startTimeMillis = mMinDate.getTimeInMillis()
-                + mMinDate.getTimeZone().getOffset(mMinDate.getTimeInMillis());
-        final long dayOffsetMillis = (mMinDate.get(Calendar.DAY_OF_WEEK) - mFirstDayOfWeek)
-                * MILLIS_IN_DAY;
+            throw new IllegalArgumentException("fromDate: " + mMinDate.getTime() + " does not precede toDate: " + date.getTime());
+
+        final long endTimeMillis = date.getTimeInMillis() + date.getTimeZone().getOffset(date.getTimeInMillis());
+        final long startTimeMillis = mMinDate.getTimeInMillis() + mMinDate.getTimeZone().getOffset(mMinDate.getTimeInMillis());
+        final long dayOffsetMillis = (mMinDate.get(Calendar.DAY_OF_WEEK) - mFirstDayOfWeek) * MILLIS_IN_DAY;
+
         return (int) ((endTimeMillis - startTimeMillis + dayOffsetMillis) / MILLIS_IN_WEEK);
     }
 
@@ -1454,8 +1395,7 @@ public class HighlightCalendarView extends FrameLayout
         {
             mCurrentScrollState = mNewState;
             // Fix the position after a scroll or a fling ends
-            if (mNewState == OnScrollListener.SCROLL_STATE_IDLE
-                    && mPreviousScrollState != OnScrollListener.SCROLL_STATE_IDLE)
+            if (mNewState == OnScrollListener.SCROLL_STATE_IDLE && mPreviousScrollState != OnScrollListener.SCROLL_STATE_IDLE)
             {
                 final View child = mView.getChildAt(0);
                 if (child == null)
@@ -1463,10 +1403,10 @@ public class HighlightCalendarView extends FrameLayout
                     // The view is no longer visible, just return
                     return;
                 }
+
                 final int dist = child.getBottom() - mListScrollTopOffset;
                 if (dist > mListScrollTopOffset)
                 {
-
                     if (mIsScrollingUp)
                     {
                         mView.smoothScrollBy(dist - child.getHeight(), ADJUSTMENT_SCROLL_DURATION);
@@ -1481,16 +1421,22 @@ public class HighlightCalendarView extends FrameLayout
                     WeekView week = (WeekView) mView.getChildAt(1);
                     final Calendar startCal = week.getFirstDay();
                     final long startDate = startCal.getTimeInMillis();
+
                     //long endDate = mView.getLastVisiblePosition();
                     week = (WeekView) mView.getChildAt(mShownWeekCount);
+
                     final Calendar endCal = week.getFirstDay();
+
                     endCal.add(Calendar.DAY_OF_MONTH, DAYS_PER_WEEK - 1);
+
                     mOnDateChangeListener.onViewChanged(startDate, endCal.getTimeInMillis());
-//                Calendar endDate = ((WeekView) mAdapter.getItem(mListView.getLastVisiblePosition())).getFirstDay();
-//                endDate.add(Calendar.DAY_OF_MONTH, DAYS_PER_WEEK);
-//                mOnDateChangeListener.onViewChanged(startDate , endDate.getTimeInMillis());
+
+                    //Calendar endDate = ((WeekView) mAdapter.getItem(mListView.getLastVisiblePosition())).getFirstDay();
+                    //endDate.add(Calendar.DAY_OF_MONTH, DAYS_PER_WEEK);
+                    //mOnDateChangeListener.onViewChanged(startDate , endDate.getTimeInMillis());
                 }
             }
+
             mPreviousScrollState = mNewState;
         }
     }
@@ -1526,11 +1472,9 @@ public class HighlightCalendarView extends FrameLayout
         {
             mSelectedWeek = getWeeksSinceMinDate(mSelectedDate);
             mTotalWeekCount = getWeeksSinceMinDate(mMaxDate);
-            if (mMinDate.get(Calendar.DAY_OF_WEEK) != mFirstDayOfWeek
-                    || mMaxDate.get(Calendar.DAY_OF_WEEK) != mFirstDayOfWeek)
-            {
+
+            if (mMinDate.get(Calendar.DAY_OF_WEEK) != mFirstDayOfWeek || mMaxDate.get(Calendar.DAY_OF_WEEK) != mFirstDayOfWeek)
                 mTotalWeekCount++;
-            }
         }
 
         /**
@@ -1548,14 +1492,13 @@ public class HighlightCalendarView extends FrameLayout
          */
         public void setSelectedDay(Calendar selectedDay)
         {
-            if (selectedDay.get(Calendar.DAY_OF_YEAR) == mSelectedDate.get(Calendar.DAY_OF_YEAR)
-                    && selectedDay.get(Calendar.YEAR) == mSelectedDate.get(Calendar.YEAR))
-            {
+            if (selectedDay.get(Calendar.DAY_OF_YEAR) == mSelectedDate.get(Calendar.DAY_OF_YEAR) && selectedDay.get(Calendar.YEAR) == mSelectedDate.get(Calendar.YEAR))
                 return;
-            }
+
             mSelectedDate.setTimeInMillis(selectedDay.getTimeInMillis());
             mSelectedWeek = getWeeksSinceMinDate(mSelectedDate);
             mFocusedMonth = mSelectedDate.get(Calendar.MONTH);
+
             notifyDataSetChanged();
         }
 
@@ -1581,6 +1524,7 @@ public class HighlightCalendarView extends FrameLayout
         public View getView(int position, View convertView, ViewGroup parent)
         {
             WeekView weekView = null;
+
             if (convertView != null)
             {
                 weekView = (WeekView) convertView;
@@ -1588,16 +1532,16 @@ public class HighlightCalendarView extends FrameLayout
             else
             {
                 weekView = new WeekView(mContext);
-                final android.widget.AbsListView.LayoutParams params =
-                        new android.widget.AbsListView.LayoutParams(LayoutParams.WRAP_CONTENT,
-                                LayoutParams.WRAP_CONTENT);
+
+                final android.widget.AbsListView.LayoutParams params = new android.widget.AbsListView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
                 weekView.setLayoutParams(params);
                 weekView.setClickable(true);
                 weekView.setOnTouchListener(this);
             }
 
-            final int selectedWeekDay = (mSelectedWeek == position) ? mSelectedDate.get(
-                    Calendar.DAY_OF_WEEK) : -1;
+            final int selectedWeekDay = (mSelectedWeek == position) ? mSelectedDate.get(Calendar.DAY_OF_WEEK) : -1;
+
             weekView.init(position, selectedWeekDay, mFocusedMonth);
 
             return weekView;
@@ -1934,10 +1878,11 @@ public class HighlightCalendarView extends FrameLayout
                 return false;
             }
             // Selection is (x - start) / (pixels/day) == (x -s) * day / pixels
-            final int dayPosition = (int) ((x - dayStart) * mDaysPerWeek
-                    / (mWidth - dayStart));
+            final int dayPosition = (int) ((x - dayStart) * mDaysPerWeek / (mWidth - dayStart));
+
             outCalendar.setTimeInMillis(mFirstDay.getTimeInMillis());
             outCalendar.add(Calendar.DAY_OF_MONTH, dayPosition);
+
             return true;
         }
 
@@ -1987,8 +1932,10 @@ public class HighlightCalendarView extends FrameLayout
 
             mDrawPaint.setTextAlign(Align.CENTER);
             mDrawPaint.setTextSize(mDateTextSize);
+
             int i = 0;
             final int divisor = 2 * nDays;
+
             if (mShowWeekNumber)
             {
                 mDrawPaint.setColor(mWeekNumberColor);
@@ -1996,6 +1943,7 @@ public class HighlightCalendarView extends FrameLayout
                 canvas.drawText(mDayNumbers[0], x, y, mDrawPaint);
                 i++;
             }
+
             final int center = mHeight / 2;
             final int textSize2 = mDateTextSize / 2;
             final int bottom = center + textSize2 + 20;
@@ -2035,17 +1983,18 @@ public class HighlightCalendarView extends FrameLayout
         {
             // If it is the topmost fully visible child do not draw separator line
             int firstFullyVisiblePosition = mListView.getFirstVisiblePosition();
+
             if (mListView.getChildAt(0).getTop() < 0)
-            {
                 firstFullyVisiblePosition++;
-            }
+
             if (firstFullyVisiblePosition == mWeek)
-            {
                 return;
-            }
+
             mDrawPaint.setColor(mWeekSeparatorLineColor);
             mDrawPaint.setStrokeWidth(mWeekSeperatorLineWidth);
+
             final float x = mShowWeekNumber ? mWidth / mNumCells : 0;
+
             canvas.drawLine(x, 0, mWidth, 0, mDrawPaint);
         }
 
@@ -2057,16 +2006,11 @@ public class HighlightCalendarView extends FrameLayout
         private void drawSelectedDateVerticalBars(Canvas canvas)
         {
             if (!mHasSelectedDay)
-            {
                 return;
-            }
-            mSelectedDateVerticalBar.setBounds(mSelectedLeft - mSelectedDateVerticalBarWidth / 2,
-                    mWeekSeperatorLineWidth,
-                    mSelectedLeft + mSelectedDateVerticalBarWidth / 2, mHeight);
+
+            mSelectedDateVerticalBar.setBounds(mSelectedLeft - mSelectedDateVerticalBarWidth / 2, mWeekSeperatorLineWidth, mSelectedLeft + mSelectedDateVerticalBarWidth / 2, mHeight);
             mSelectedDateVerticalBar.draw(canvas);
-            mSelectedDateVerticalBar.setBounds(mSelectedRight - mSelectedDateVerticalBarWidth / 2,
-                    mWeekSeperatorLineWidth,
-                    mSelectedRight + mSelectedDateVerticalBarWidth / 2, mHeight);
+            mSelectedDateVerticalBar.setBounds(mSelectedRight - mSelectedDateVerticalBarWidth / 2, mWeekSeperatorLineWidth, mSelectedRight + mSelectedDateVerticalBarWidth / 2, mHeight);
             mSelectedDateVerticalBar.draw(canvas);
         }
 
@@ -2101,8 +2045,7 @@ public class HighlightCalendarView extends FrameLayout
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
         {
-            mHeight = (mListView.getHeight() - mListView.getPaddingTop() - mListView
-                    .getPaddingBottom()) / mShownWeekCount;
+            mHeight = (mListView.getHeight() - mListView.getPaddingTop() - mListView.getPaddingBottom()) / mShownWeekCount;
             setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), mHeight);
         }
     }
@@ -2116,7 +2059,6 @@ public class HighlightCalendarView extends FrameLayout
      */
     private class EventMenuEntry implements DateEvent
     {
-
         private final String mMenuText;
         private final long mDate;
 
@@ -2140,7 +2082,6 @@ public class HighlightCalendarView extends FrameLayout
         {
             return mMenuText;
         }
-
     }
 
 }

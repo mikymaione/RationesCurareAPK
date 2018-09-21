@@ -7,7 +7,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <resources>
-    
+
     <declare-styleable name="HighlightCalendarView">
         <attr name="eventBarColor" format="color" />
     </declare-styleable>
@@ -44,7 +44,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <!-- Default disabled icon alpha for each menu item that shows an icon. -->
         <attr name="android:itemIconDisabledAlpha" />
         <!-- Whether space should be reserved in layout when an icon is missing. -->
-        
+
     </declare-styleable>
 
     <declare-styleable name="CalendarView">
@@ -53,13 +53,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <!-- Whether do show week numbers. -->
         <attr name="android:showWeekNumber" />
         <!-- The minimal date shown by this calendar view in mm/dd/yyyy format. -->
-        <attr name="android:minDate"/>
+        <attr name="android:minDate" />
         <!-- The minimal date shown by this calendar view in mm/dd/yyyy format. -->
-        <attr name="android:maxDate"  />
+        <attr name="android:maxDate" />
         <!-- The number of weeks to be shown. -->
-        <attr name="android:shownWeekCount"/>
+        <attr name="android:shownWeekCount" />
         <!-- The background color for the selected week. -->
-        <attr name="android:selectedWeekBackgroundColor"  />
+        <attr name="android:selectedWeekBackgroundColor" />
         <!-- The color for the dates of the focused month. -->
         <attr name="android:focusedMonthDateColor" />
         <!-- The color for the dates of an unfocused month. -->

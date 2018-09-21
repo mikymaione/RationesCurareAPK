@@ -9,38 +9,38 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <group android:id="@+id/ControlliSpostamento">
         <item
             android:id="@+id/action_AnnoPrecedente"
-            android:title="@string/action_AnnoPrecedente"
+            android:icon="@drawable/resultset_first"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_first" />
+            android:title="@string/action_AnnoPrecedente" />
 
         <item
             android:id="@+id/action_MesePrecedente"
-            android:title="@string/action_MesePrecedente"
+            android:icon="@drawable/resultset_previous"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_previous" />
+            android:title="@string/action_MesePrecedente" />
 
         <item
             android:id="@+id/action_Oggi"
-            android:title="@string/action_Oggi"
+            android:icon="@drawable/calendar_view_today"
             android:showAsAction="always"
-            android:icon="@drawable/calendar_view_today" />
+            android:title="@string/action_Oggi" />
 
         <item
             android:id="@+id/action_MeseSuccessivo"
-            android:title="@string/action_MeseSuccessivo"
+            android:icon="@drawable/resultset_next"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_next" />
+            android:title="@string/action_MeseSuccessivo" />
 
         <item
             android:id="@+id/action_AnnoSuccessivo"
-            android:title="@string/action_AnnoSuccessivo"
+            android:icon="@drawable/resultset_last"
             android:showAsAction="always"
-            android:icon="@drawable/resultset_last" />
+            android:title="@string/action_AnnoSuccessivo" />
     </group>
 
     <item
         android:id="@+id/action_nuovo"
-        android:title="@string/action_nuovo"
+        android:icon="@drawable/add"
         android:showAsAction="always"
-        android:icon="@drawable/add" />
+        android:title="@string/action_nuovo" />
 </menu>
