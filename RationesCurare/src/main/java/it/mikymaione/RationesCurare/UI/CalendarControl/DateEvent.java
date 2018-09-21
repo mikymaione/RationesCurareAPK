@@ -32,5 +32,5 @@ public interface DateEvent
      *
      * @return the date in milliseconds since epoche
      */
-    public long getDate();
+    long getDate();
 }

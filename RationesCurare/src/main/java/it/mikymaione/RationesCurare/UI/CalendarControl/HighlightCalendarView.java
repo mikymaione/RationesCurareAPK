@@ -305,11 +305,19 @@ public class HighlightCalendarView extends FrameLayout
             throw new IllegalArgumentException("Max date cannot be before min date.");
 
         mShownWeekCount = attributesArray.getInt(R.styleable.CalendarView_android_shownWeekCount, DEFAULT_SHOWN_WEEK_COUNT);
-        mSelectedWeekBackgroundColor = attributesArray.getColor(R.styleable.CalendarView_android_selectedWeekBackgroundColor, 0);
-        mFocusedMonthDateColor = attributesArray.getColor(R.styleable.CalendarView_android_focusedMonthDateColor, 0);
-        mUnfocusedMonthDateColor = attributesArray.getColor(R.styleable.CalendarView_android_unfocusedMonthDateColor, 0);
-        mWeekSeparatorLineColor = attributesArray.getColor(R.styleable.CalendarView_android_weekSeparatorLineColor, 0);
-        mWeekNumberColor = attributesArray.getColor(R.styleable.CalendarView_android_weekNumberColor, 0);
+
+        mSelectedWeekBackgroundColor = Color.rgb(226, 226, 226);
+        mFocusedMonthDateColor = Color.BLACK;
+        mUnfocusedMonthDateColor = Color.LTGRAY;
+        mWeekSeparatorLineColor = Color.LTGRAY;
+        mWeekNumberColor = Color.BLUE;
+
+        //mSelectedWeekBackgroundColor = attributesArray.getColor(R.styleable.CalendarView_android_selectedWeekBackgroundColor, 0);
+        //mFocusedMonthDateColor = attributesArray.getColor(R.styleable.CalendarView_android_focusedMonthDateColor, 0);
+        //mUnfocusedMonthDateColor = attributesArray.getColor(R.styleable.CalendarView_android_unfocusedMonthDateColor, 0);
+        //mWeekSeparatorLineColor = attributesArray.getColor(R.styleable.CalendarView_android_weekSeparatorLineColor, 0);
+        //mWeekNumberColor = attributesArray.getColor(R.styleable.CalendarView_android_weekNumberColor, 0);
+
         mSelectedDateVerticalBar = attributesArray.getDrawable(R.styleable.CalendarView_android_selectedDateVerticalBar);
 
         mDateTextAppearanceResId = attributesArray.getResourceId(R.styleable.CalendarView_android_dateTextAppearance, android.R.style.TextAppearance_Small);
@@ -319,7 +327,8 @@ public class HighlightCalendarView extends FrameLayout
         attributesArray.recycle();
 
         final TypedArray attributesArray1 = context.obtainStyledAttributes(attrs, R.styleable.HighlightCalendarView);
-        mEventBarColor = attributesArray1.getColor(R.styleable.HighlightCalendarView_eventBarColor, 0xFFA01010);
+        //mEventBarColor = attributesArray1.getColor(R.styleable.HighlightCalendarView_eventBarColor, 0xFFA01010);
+        mEventBarColor = Color.GREEN;
         attributesArray1.recycle();
 
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -888,7 +897,7 @@ public class HighlightCalendarView extends FrameLayout
 
             if (daysEvents == null)
             {
-                daysEvents = new ArrayList<DateEvent>();
+                daysEvents = new ArrayList<>();
                 mEvents.put(dayHash, daysEvents);
             }
 
@@ -1965,10 +1974,10 @@ public class HighlightCalendarView extends FrameLayout
 
                     //canvas.drawLine(x - widthCell2, bottom, x + widthCell2, bottom, mDrawPaint);
 
-                    mDrawPaint.setColor(Color.WHITE);
-                    canvas.drawCircle(x - widthCell2 + 11, bottom - 21, 10, mDrawPaint);
+                    mDrawPaint.setColor(Color.RED);
+                    canvas.drawCircle(x - widthCell2 + 11, bottom - 21, 14, mDrawPaint);
 
-                    mDrawPaint.setColor(Color.BLACK);
+                    mDrawPaint.setColor(Color.WHITE);
                     canvas.drawText(Integer.toString(mEventDay[i]), x - widthCell2 + 11, bottom - 16, mDrawPaint);
                 }
             }
