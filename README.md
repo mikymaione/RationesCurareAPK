@@ -1,12 +1,11 @@
+# <img src="http://www.maionemiky.it/images/RC.png" alt="logo" />  RationesCurare for Android 4
+An open-source software for the management of the personal economy.
 
-# RationesCurareAPK
-<img src="http://www.maionemiky.it/images/RC.png" alt="logo" /> RationesCurare for Android
-
-
+## Minimum system requirements
+1. Android 4
+   
 ## IDE
-Android Studio 3.1 (http://developer.android.com/studio)
-
-
+Android Studio 3.1 (https://developer.android.com/studio)
 
 ## License
 Copyright 2018 (c) [MAIONE MIKY]. All rights reserved.
